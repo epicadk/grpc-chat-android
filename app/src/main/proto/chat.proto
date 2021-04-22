@@ -2,7 +2,7 @@ syntax = "proto3";
 package chat; 
 
 option go_package = "models";
-option java_package = "com.example.grpc-chat.models";
+option java_package = "com.example.grpc_chat_android.models";
 
 message Message{
     string Sender = 1;

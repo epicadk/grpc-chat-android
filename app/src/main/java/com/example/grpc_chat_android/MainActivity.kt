@@ -1,7 +1,9 @@
 package com.example.grpc_chat_android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.grpc_chat_android.models.ChatServiceGrpc
+import io.grpc.ManagedChannelBuilder
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
