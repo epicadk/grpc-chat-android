@@ -1,3 +1,4 @@
+
 object Dependencies {
 
     object AndroidX {
@@ -5,6 +6,15 @@ object Dependencies {
 
         //const val contraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    }
+
+    object Room {
+
+
+       const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
+       const val roomCompiler ="androidx.room:room-compiler:${Versions.room_version}"
+       const val  roomKtx =  "androidx.room:room-ktx:${Versions.room_version}"
+
     }
 
     object Grpc {
@@ -45,5 +55,6 @@ object Dependencies {
         const val tomcat = "6.0.53"
         const val material = "1.3.0"
         const val app_compat = "1.2.0"
+        const val room_version = "2.3.0"
     }
 }

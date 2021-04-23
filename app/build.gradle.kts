@@ -1,9 +1,11 @@
 import com.google.protobuf.gradle.*
 
-        plugins {
+ plugins {
             id (Plugins.BuildPlugins.androidApp)
             id (Plugins.BuildPlugins.kotlinAndroid)
             id (Plugins.BuildPlugins.protobuf)
+            id(Plugins.BuildPlugins.kapt)
+            id ("dagger.hilt.android.plugin")
         }
 
 android {
@@ -86,4 +88,17 @@ dependencies {
     implementation (Dependencies.Grpc.stub)
     implementation (Dependencies.tomcatAnnotations)
     implementation (Dependencies.multidex)
+    implementation (Dependencies.Room.roomRuntime)
+    kapt (Dependencies.Room.roomCompiler)
+    kapt (Dependencies.Room.roomKtx)
+    implementation ("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt ("com.google.dagger:hilt-compiler:2.34.1-beta")
+
+    // For instrumentation tests
+    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.34.1-beta")
+    kaptAndroidTest ("com.google.dagger:hilt-compiler:2.34.1-beta")
+
+    // For local unit tests
+    testImplementation ("com.google.dagger:hilt-android-testing:2.34.1-beta")
+    kaptTest ("com.google.dagger:hilt-compiler:2.34.1-beta")
 }
