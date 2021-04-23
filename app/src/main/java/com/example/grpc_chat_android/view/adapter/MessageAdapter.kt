@@ -1,4 +1,4 @@
-package com.example.grpc_chat_android
+package com.example.grpc_chat_android.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ class MessageAdapter(private val messageList : List<Chat.Message>) : RecyclerVie
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder  =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
          ViewHolder(ItemMessageBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
 

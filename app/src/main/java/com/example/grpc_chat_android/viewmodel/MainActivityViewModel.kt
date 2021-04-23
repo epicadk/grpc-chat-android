@@ -1,6 +1,7 @@
-package com.example.grpc_chat_android
+package com.example.grpc_chat_android.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.example.grpc_chat_android.repository.ChatStub
 import com.example.grpc_chat_android.models.Chat
 import io.grpc.stub.StreamObserver
 

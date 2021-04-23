@@ -1,4 +1,4 @@
-package com.example.grpc_chat_android
+package com.example.grpc_chat_android.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
