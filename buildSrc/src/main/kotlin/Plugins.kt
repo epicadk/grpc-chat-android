@@ -9,6 +9,7 @@ object Plugins {
         const val protobuf = "com.google.protobuf"
         const val kotlinAndroid = "kotlin-android"
         const val androidApp = "com.android.application"
+        const val kapt ="kotlin-kapt"
     }
     object Protobuf {
         const val javaliteProtogen = "com.google.protobuf:protoc-gen-javalite:${Versions.javaLiteProtogen}"
