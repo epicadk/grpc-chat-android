@@ -12,6 +12,6 @@ import kotlinx.coroutines.flow.Flow
 interface ChatDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertChat(chat : ChatEntity)
-    @Query("SELECT * FROM ChatEntity")
+    @Query("SELECT * FROM ChatEntity ")
     fun loadAllChats() : Flow<List<ChatEntity>>
 }

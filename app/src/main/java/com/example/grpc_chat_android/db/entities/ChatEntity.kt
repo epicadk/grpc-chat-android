@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 import com.example.grpc_chat_android.models.Chat
 
 @Entity(indices = [
-    Index(value= ["time","body"]),
-    Index(value = ["id ", "body"])
+    Index(value = ["time","chatId","body"]),
 ])
 data class ChatEntity(
         @PrimaryKey(autoGenerate = true)
