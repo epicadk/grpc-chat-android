@@ -13,12 +13,12 @@ class MessageAdapter(private val messageList : List<Chat.Message>) : RecyclerVie
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageAdapter.ViewHolder  =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder  =
          ViewHolder(ItemMessageBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
 
 
-    override fun onBindViewHolder(holder: MessageAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.binding.messageBody.text = messageList[position].body
        holder.binding.messageTime.text = Date().time.toString()
     }
