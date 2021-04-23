@@ -4,8 +4,9 @@ import com.google.protobuf.gradle.*
             id (Plugins.BuildPlugins.androidApp)
             id (Plugins.BuildPlugins.kotlinAndroid)
             id (Plugins.BuildPlugins.protobuf)
-            id(Plugins.BuildPlugins.kapt)
+            id (Plugins.BuildPlugins.kapt)
             id ("dagger.hilt.android.plugin")
+            id ( "androidx.navigation.safeargs.kotlin")
         }
 
 android {
@@ -101,4 +102,8 @@ dependencies {
     // For local unit tests
     testImplementation ("com.google.dagger:hilt-android-testing:2.34.1-beta")
     kaptTest ("com.google.dagger:hilt-compiler:2.34.1-beta")
+    implementation ("androidx.datastore:datastore-preferences:1.0.0-beta01")
+    val nav_version = "2.3.5"
+    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
 }

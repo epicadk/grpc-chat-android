@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class Database {
+object Database {
 
     @Singleton
     @Provides
@@ -23,7 +23,4 @@ class Database {
     @Provides
     fun provideRepository(messageDatabase: MessageDatabase) =
         ChatRepository(messageDatabase.chatDao())
-
-
-
 }

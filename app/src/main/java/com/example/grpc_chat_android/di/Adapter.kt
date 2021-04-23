@@ -5,5 +5,5 @@ import javax.inject.Singleton
 
 @Module
 @Singleton
-class Adapter {
+object Adapter {
 }
