@@ -1,11 +1,13 @@
-package com.example.grpc_chat_android.view
+package com.example.grpc_chat_android.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.grpc_chat_android.databinding.ActivityMainBinding
 import com.example.grpc_chat_android.models.ChatServiceGrpc
+import dagger.hilt.android.AndroidEntryPoint
 import io.grpc.ManagedChannelBuilder
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,17 +1,18 @@
-package com.example.grpc_chat_android.view
+package com.example.grpc_chat_android.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.grpc_chat_android.databinding.FragmentMessageListBinding
+import com.example.grpc_chat_android.databinding.FragmentChatListBinding
 
-class MessageListFragment : Fragment() {
-    private var _binding : FragmentMessageListBinding? = null
+class ChatListFragment : Fragment() {
+    private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentMessageListBinding.inflate(inflater,container,false)
+        _binding = FragmentChatListBinding.inflate(inflater,container,false)
 
         return binding.root
     }
@@ -20,4 +21,5 @@ class MessageListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

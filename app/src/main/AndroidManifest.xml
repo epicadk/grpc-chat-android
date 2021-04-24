@@ -10,8 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Grpcchatandroid">
-        <activity android:name=".view.Register"></activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.activities.Register"></activity>
+        <activity android:name=".view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

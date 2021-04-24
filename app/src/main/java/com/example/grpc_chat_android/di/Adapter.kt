@@ -1,9 +1,11 @@
 package com.example.grpc_chat_android.di
 
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@Singleton
+@InstallIn(SingletonComponent::class)
 object Adapter {
 }

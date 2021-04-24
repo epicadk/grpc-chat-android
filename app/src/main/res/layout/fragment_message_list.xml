@@ -10,5 +10,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <EditText
+        android:hint="Type message here"
+        android:id="@+id/message_et"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
