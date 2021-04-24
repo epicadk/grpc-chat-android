@@ -13,4 +13,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+    companion object {
+        // Probably not the best way to do this
+        lateinit var user : String
+    }
 }

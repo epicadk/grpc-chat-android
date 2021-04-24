@@ -7,7 +7,7 @@ import com.google.protobuf.gradle.*
             id (Plugins.BuildPlugins.kapt)
             id ("dagger.hilt.android.plugin")
             id ( "androidx.navigation.safeargs.kotlin")
-        }
+ }
 
 android {
     compileSdkVersion(SDK.compileSdk)
@@ -78,6 +78,9 @@ dependencies {
     implementation(Dependencies.Kotlin.stdlib)
     implementation (Dependencies.AndroidX.appCompat)
     implementation (Dependencies.material)
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     testImplementation (Dependencies.Test.junit)
     implementation (Dependencies.LifeCycle.livedata)
     implementation (Dependencies.LifeCycle.viewModel)
