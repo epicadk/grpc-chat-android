@@ -38,11 +38,23 @@ object Dependencies {
         const val espresso_core =
             "androidx.test.espresso_core:${Versions.espresso_core}"
         const val junitTestRunner = "androidx.test.runner.AndroidJUnitRunner"
+        const val roboElectric = "org.robolectric:robolectric:${Versions.roboElectric}"
     }
 
+    object Hilt {
+        const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+        const val compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+        const val testing = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
+    }
+
+    object Navigation {
+      const val navigationFragment = ("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
+        const val navigationUI = ("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
+    }
     const val material = "com.google.android.material:material:${Versions.material}"
     const val tomcatAnnotations = "org.apache.tomcat:annotations-api:${Versions.tomcat}"
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
+    const val preferenceDatastore = "androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"
 
     object Versions {
         const val grpc = "1.37.0"
@@ -56,5 +68,9 @@ object Dependencies {
         const val material = "1.3.0"
         const val app_compat = "1.2.0"
         const val room_version = "2.3.0"
+        const val hilt = "2.34.1-beta"
+        const val navigation = "2.3.5"
+        const val datastoreVersion ="1.0.0-beta01"
+        const val roboElectric = "4.5.1"
     }
 }

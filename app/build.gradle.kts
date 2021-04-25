@@ -5,8 +5,8 @@ import com.google.protobuf.gradle.*
             id (Plugins.BuildPlugins.kotlinAndroid)
             id (Plugins.BuildPlugins.protobuf)
             id (Plugins.BuildPlugins.kapt)
-            id ("dagger.hilt.android.plugin")
-            id ( "androidx.navigation.safeargs.kotlin")
+            id (Plugins.BuildPlugins.hilt)
+            id ( Plugins.BuildPlugins.safeArgs)
  }
 
 android {
@@ -78,9 +78,6 @@ dependencies {
     implementation(Dependencies.Kotlin.stdlib)
     implementation (Dependencies.AndroidX.appCompat)
     implementation (Dependencies.material)
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     testImplementation (Dependencies.Test.junit)
     implementation (Dependencies.LifeCycle.livedata)
     implementation (Dependencies.LifeCycle.viewModel)
@@ -95,18 +92,14 @@ dependencies {
     implementation (Dependencies.Room.roomRuntime)
     annotationProcessor(Dependencies.Room.roomCompiler)
     kapt(Dependencies.Room.roomKtx)
-    implementation ("com.google.dagger:hilt-android:2.34.1-beta")
-    kapt ("com.google.dagger:hilt-compiler:2.34.1-beta")
-
-    // For instrumentation tests
-    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.34.1-beta")
-    kaptAndroidTest ("com.google.dagger:hilt-compiler:2.34.1-beta")
-
-    // For local unit tests
-    testImplementation ("com.google.dagger:hilt-android-testing:2.34.1-beta")
-    kaptTest ("com.google.dagger:hilt-compiler:2.34.1-beta")
-    implementation ("androidx.datastore:datastore-preferences:1.0.0-beta01")
-    val nav_version = "2.3.5"
-    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation (Dependencies.Hilt.hilt)
+    kapt (Dependencies.Hilt.compiler)
+    androidTestImplementation  (Dependencies.Hilt.testing)
+    kaptAndroidTest (Dependencies.Hilt.compiler)
+    testImplementation (Dependencies.Hilt.testing)
+    kaptTest (Dependencies.Hilt.compiler)
+    implementation (Dependencies.preferenceDatastore)
+    implementation (Dependencies.Navigation.navigationFragment)
+    implementation (Dependencies.Navigation.navigationUI)
+    testImplementation(Dependencies.Test.roboElectric)
 }

@@ -3,6 +3,8 @@ object Plugins {
         const val androidGradlePlugin =  "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
         const val koltinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Dependencies.Versions.kotlin}"
         const val protobufGradlePlugin =  "com.google.protobuf:protobuf-gradle-plugin:${Versions.protobufGradlePlugin}"
+        const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Dependencies.Versions.hilt}"
+        const val nav_args = "androidx.navigation:navigation-safe-args-gradle-plugin:${Dependencies.Versions.navigation}"
     }
 
     object BuildPlugins {
@@ -10,6 +12,8 @@ object Plugins {
         const val kotlinAndroid = "kotlin-android"
         const val androidApp = "com.android.application"
         const val kapt ="kotlin-kapt"
+        const val hilt = "dagger.hilt.android.plugin"
+        const val safeArgs = "androidx.navigation.safeargs.kotlin"
     }
     object Protobuf {
         const val javaliteProtogen = "com.google.protobuf:protoc-gen-javalite:${Versions.javaLiteProtogen}"
