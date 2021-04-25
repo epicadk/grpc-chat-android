@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentChatListBinding
 
 class ChatListFragment : Fragment() {
@@ -12,8 +13,10 @@ class ChatListFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentChatListBinding.inflate(inflater,container,false)
-
+        _binding = FragmentChatListBinding.inflate(inflater, container, false)
+        binding.fbAddChat.setOnClickListener {
+            this.findNavController().navigate(ChatListFragmentDirections.actionChatListFragmentToAddUserFragment2())
+        }
         return binding.root
     }
 

@@ -93,8 +93,8 @@ dependencies {
     implementation (Dependencies.tomcatAnnotations)
     implementation (Dependencies.multidex)
     implementation (Dependencies.Room.roomRuntime)
-    kapt (Dependencies.Room.roomCompiler)
-    annotationProcessor (Dependencies.Room.roomKtx)
+    annotationProcessor(Dependencies.Room.roomCompiler)
+    kapt(Dependencies.Room.roomKtx)
     implementation ("com.google.dagger:hilt-android:2.34.1-beta")
     kapt ("com.google.dagger:hilt-compiler:2.34.1-beta")
 

@@ -18,6 +18,10 @@
         android:id="@+id/messageListFragment"
         android:name="com.example.grpc_chat_android.view.fragments.MessageListFragment"
         android:label="MessageListFragment" >
+        <argument
+            android:name="chatid"
+            app:argType="string"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/action_messageListFragment_to_chatListFragment"
             app:destination="@id/chatListFragment" />

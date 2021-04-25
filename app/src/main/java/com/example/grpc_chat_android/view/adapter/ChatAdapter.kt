@@ -2,9 +2,11 @@ package com.example.grpc_chat_android.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grpc_chat_android.databinding.ItemChatBinding
 import com.example.grpc_chat_android.models.Chat
+import com.example.grpc_chat_android.view.fragments.ChatListFragmentDirections
 
 class ChatAdapter(private val chatList : List<Chat.Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
@@ -21,6 +23,7 @@ class ChatAdapter(private val chatList : List<Chat.Message>) : RecyclerView.Adap
         holder.binding.chatTitle.text = chatList[position].sender
         holder.binding.chatLast.text = chatList[position].sender
         //holder.binding.messageTime.text = Date().time.toString()
+        holder.binding.root.findNavController().navigate(ChatListFragmentDirections.actionChatListFragmentToMessageListFragment(chatList[position].sender))
     }
 
     override fun getItemCount() =
