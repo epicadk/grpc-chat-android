@@ -7,7 +7,8 @@ import com.example.grpc_chat_android.databinding.ItemMessageBinding
 import com.example.grpc_chat_android.models.Chat
 import java.util.Date
 
-class MessageAdapter(private val messageList : List<Chat.Message>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
+class MessageAdapter() : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
+    lateinit var messageList : List<Chat.Message>
 
     class ViewHolder(val binding : ItemMessageBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -24,6 +25,6 @@ class MessageAdapter(private val messageList : List<Chat.Message>) : RecyclerVie
     }
 
     override fun getItemCount() =
-        messageList.size
+        if (::messageList.isInitialized) messageList.size else 0
 
 }

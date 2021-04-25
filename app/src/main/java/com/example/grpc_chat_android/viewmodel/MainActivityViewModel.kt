@@ -1,6 +1,5 @@
 package com.example.grpc_chat_android.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.ChatRepository
@@ -40,12 +39,8 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
     }
 
     fun sendMessage(message: Chat.Message) {
-
-        viewModelScope.launch { repository.insert(message) }
         ChatStub.Stub.sendChat(message, object : StreamObserver<Chat.Success> {
             override fun onNext(value: Chat.Success?) {
-                // TODO add in RV
-                Log.d("niggs", "onNext: ")
             }
 
             override fun onError(t: Throwable?) {
@@ -57,5 +52,6 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
             }
 
         })
+        viewModelScope.launch { repository.insert(message) }
     }
 }
