@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav"
-    app:startDestination="@id/chatListFragment">
+    app:startDestination="@id/registerFragment">
 
     <fragment
         android:id="@+id/chatListFragment"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_chatListFragment_to_addUserFragment2"
             app:destination="@id/addUserFragment" />
+        <argument
+            android:name="User"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/messageListFragment"
@@ -34,4 +37,12 @@
             android:id="@+id/action_addUserFragment2_to_messageListFragment"
             app:destination="@id/messageListFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.grpc_chat_android.view.fragments.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+    </fragment>
 </navigation>
