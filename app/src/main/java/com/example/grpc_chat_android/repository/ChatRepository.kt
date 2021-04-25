@@ -8,9 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 class ChatRepository(private val chatDao: ChatDao) {
     val allChats : Flow<List<ChatEntity>> = chatDao.loadAllChats()
+    val chatList  = chatDao.loadChatPreview()
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(message: Chat.Message){
         chatDao.insertChat(ChatEntity(message))
     }

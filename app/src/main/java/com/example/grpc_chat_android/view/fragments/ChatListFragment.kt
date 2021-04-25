@@ -5,18 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.grpc_chat_android.databinding.FragmentChatListBinding
+import com.example.grpc_chat_android.viewmodel.MainActivityViewModel
 
 class ChatListFragment : Fragment() {
     private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel : MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
         binding.fbAddChat.setOnClickListener {
             this.findNavController().navigate(ChatListFragmentDirections.actionChatListFragmentToAddUserFragment2())
         }
+        binding.rvChatList.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 

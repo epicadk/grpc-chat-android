@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grpc_chat_android.databinding.ItemChatBinding
-import com.example.grpc_chat_android.models.Chat
+import com.example.grpc_chat_android.db.entities.ChatPreview
 import com.example.grpc_chat_android.view.fragments.ChatListFragmentDirections
 
-class ChatAdapter(private val chatList : List<Chat.Message>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter(private val chatList : List<ChatPreview>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     class ViewHolder(val binding : ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
 
