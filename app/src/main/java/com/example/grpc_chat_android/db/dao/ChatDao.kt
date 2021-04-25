@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ChatDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertChat(chat : ChatEntity)
+    suspend fun insertChat(chat: ChatEntity)
     @Query("SELECT * FROM ChatEntity ")
-    fun loadAllChats() : Flow<List<ChatEntity>>
+    fun loadAllChats(): Flow<List<ChatEntity>>
 
     @Query("SELECT DISTINCT(sender) FROM ChatEntity")
-    fun loadChatPreview() : Flow<List<ChatPreview>>
+    fun loadChatPreview(): Flow<List<ChatPreview>>
 }

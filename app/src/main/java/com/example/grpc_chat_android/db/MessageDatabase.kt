@@ -26,7 +26,5 @@ abstract class MessageDatabase : RoomDatabase() {
                 instance
             }
         }
-
     }
-
 }

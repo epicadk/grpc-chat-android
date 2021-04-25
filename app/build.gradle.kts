@@ -1,13 +1,13 @@
-import com.google.protobuf.gradle.*
+import com.google.protobuf.gradle.* // ktlint-disable no-wildcard-imports
 
- plugins {
-            id (Plugins.BuildPlugins.androidApp)
-            id (Plugins.BuildPlugins.kotlinAndroid)
-            id (Plugins.BuildPlugins.protobuf)
-            id (Plugins.BuildPlugins.kapt)
-            id (Plugins.BuildPlugins.hilt)
-            id ( Plugins.BuildPlugins.safeArgs)
- }
+plugins {
+    id(Plugins.BuildPlugins.androidApp)
+    id(Plugins.BuildPlugins.kotlinAndroid)
+    id(Plugins.BuildPlugins.protobuf)
+    id(Plugins.BuildPlugins.kapt)
+    id(Plugins.BuildPlugins.hilt)
+    id(Plugins.BuildPlugins.safeArgs)
+}
 
 android {
     compileSdkVersion(SDK.compileSdk)
@@ -24,48 +24,51 @@ android {
         testInstrumentationRunner = Dependencies.Test.junitTestRunner
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility (JavaVersion.VERSION_1_8)
-        targetCompatibility (JavaVersion.VERSION_1_8)
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
-protobuf{
+protobuf {
 
-    protoc{
+    protoc {
         artifact = Plugins.Protobuf.protoc
     }
 
     plugins {
-        //id("javalite") { artifact = Plugins.Protobuf.javaliteProtogen}
+        // id("javalite") { artifact = Plugins.Protobuf.javaliteProtogen}
         id("grpc") {
             artifact = Plugins.Protobuf.grpcJava
         }
     }
 
     generateProtoTasks {
-        all().forEach{ task ->
-            task.builtins{
+        all().forEach { task ->
+            task.builtins {
                 java {}
             }
             task.plugins {
-                id("java"){
+                id("java") {
                     option("lite")
                 }
-                id("grpc"){
+                id("grpc") {
                     option("lite")
                 }
             }
@@ -76,30 +79,30 @@ protobuf{
 dependencies {
 
     implementation(Dependencies.Kotlin.stdlib)
-    implementation (Dependencies.AndroidX.appCompat)
-    implementation (Dependencies.material)
-    testImplementation (Dependencies.Test.junit)
-    implementation (Dependencies.LifeCycle.livedata)
-    implementation (Dependencies.LifeCycle.viewModel)
-    implementation (Dependencies.AndroidX.fragmentKtx)
-    androidTestImplementation (Dependencies.Test.extJunit)
-    //androidTestImplementation (Dependencies.Test.espresso_core)
-    implementation (Dependencies.Grpc.okHttp)
-    implementation (Dependencies.Grpc.protobuf)
-    implementation (Dependencies.Grpc.stub)
-    implementation (Dependencies.tomcatAnnotations)
-    implementation (Dependencies.multidex)
-    implementation (Dependencies.Room.roomRuntime)
+    implementation(Dependencies.AndroidX.appCompat)
+    implementation(Dependencies.material)
+    testImplementation(Dependencies.Test.junit)
+    implementation(Dependencies.LifeCycle.livedata)
+    implementation(Dependencies.LifeCycle.viewModel)
+    implementation(Dependencies.AndroidX.fragmentKtx)
+    androidTestImplementation(Dependencies.Test.extJunit)
+    // androidTestImplementation (Dependencies.Test.espresso_core)
+    implementation(Dependencies.Grpc.okHttp)
+    implementation(Dependencies.Grpc.protobuf)
+    implementation(Dependencies.Grpc.stub)
+    implementation(Dependencies.tomcatAnnotations)
+    implementation(Dependencies.multidex)
+    implementation(Dependencies.Room.roomRuntime)
     kapt(Dependencies.Room.roomCompiler)
     implementation(Dependencies.Room.roomKtx)
-    implementation (Dependencies.Hilt.hilt)
-    kapt (Dependencies.Hilt.compiler)
-    androidTestImplementation  (Dependencies.Hilt.testing)
-    kaptAndroidTest (Dependencies.Hilt.compiler)
-    testImplementation (Dependencies.Hilt.testing)
-    kaptTest (Dependencies.Hilt.compiler)
-    implementation (Dependencies.preferenceDatastore)
-    implementation (Dependencies.Navigation.navigationFragment)
-    implementation (Dependencies.Navigation.navigationUI)
+    implementation(Dependencies.Hilt.hilt)
+    kapt(Dependencies.Hilt.compiler)
+    androidTestImplementation(Dependencies.Hilt.testing)
+    kaptAndroidTest(Dependencies.Hilt.compiler)
+    testImplementation(Dependencies.Hilt.testing)
+    kaptTest(Dependencies.Hilt.compiler)
+    implementation(Dependencies.preferenceDatastore)
+    implementation(Dependencies.Navigation.navigationFragment)
+    implementation(Dependencies.Navigation.navigationUI)
     testImplementation(Dependencies.Test.roboElectric)
 }

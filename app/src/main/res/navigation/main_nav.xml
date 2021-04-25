@@ -1,48 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav"
-    app:startDestination="@id/registerFragment">
+<?xml version="1.0" encoding="utf-8" ?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/registerFragment"
+>
 
     <fragment
         android:id="@+id/chatListFragment"
         android:name="com.example.grpc_chat_android.view.fragments.ChatListFragment"
-        android:label="ChatListFragment" >
+        android:label="ChatListFragment"
+    >
         <action
             android:id="@+id/action_chatListFragment_to_messageListFragment"
-            app:destination="@id/messageListFragment" />
+            app:destination="@id/messageListFragment"
+        />
         <action
             android:id="@+id/action_chatListFragment_to_addUserFragment2"
-            app:destination="@id/addUserFragment" />
-        <argument
-            android:name="User"
-            app:argType="string" />
+            app:destination="@id/addUserFragment"
+        />
+        <argument android:name="User" app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/messageListFragment"
         android:name="com.example.grpc_chat_android.view.fragments.MessageListFragment"
-        android:label="MessageListFragment" >
+        android:label="MessageListFragment"
+    >
         <argument
             android:name="chatid"
             app:argType="string"
-            android:defaultValue="0"/>
+            android:defaultValue="0"
+        />
         <action
             android:id="@+id/action_messageListFragment_to_chatListFragment"
-            app:destination="@id/chatListFragment" />
+            app:destination="@id/chatListFragment"
+        />
     </fragment>
     <dialog
         android:id="@+id/addUserFragment"
         android:name="com.example.grpc_chat_android.view.fragments.AddUserFragment"
-        android:label="AddUserFragment" >
+        android:label="AddUserFragment"
+    >
         <action
             android:id="@+id/action_addUserFragment2_to_messageListFragment"
-            app:destination="@id/messageListFragment" />
+            app:destination="@id/messageListFragment"
+        />
     </dialog>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.grpc_chat_android.view.fragments.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment"
+    >
         <action
             android:id="@+id/action_registerFragment_to_chatListFragment"
-            app:destination="@id/chatListFragment" />
+            app:destination="@id/chatListFragment"
+        />
     </fragment>
 </navigation>

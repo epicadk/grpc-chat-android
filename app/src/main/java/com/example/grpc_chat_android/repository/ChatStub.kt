@@ -5,7 +5,6 @@ import io.grpc.ManagedChannelBuilder
 
 object ChatStub {
     private val channel = ManagedChannelBuilder
-        .forAddress("host",8080).usePlaintext().build()
+        .forAddress("host", 8080).usePlaintext().build()
     val Stub: ChatServiceGrpc.ChatServiceStub = ChatServiceGrpc.newStub(channel)
-
 }

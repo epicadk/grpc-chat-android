@@ -1,20 +1,17 @@
-
 object Dependencies {
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.app_compat}"
 
-        //const val contraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+        // const val contraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     }
 
     object Room {
 
-
-       const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
-       const val roomCompiler ="androidx.room:room-compiler:${Versions.room_version}"
-       const val  roomKtx =  "androidx.room:room-ktx:${Versions.room_version}"
-
+        const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
+        const val roomCompiler = "androidx.room:room-compiler:${Versions.room_version}"
+        const val roomKtx = "androidx.room:room-ktx:${Versions.room_version}"
     }
 
     object Grpc {
@@ -48,13 +45,16 @@ object Dependencies {
     }
 
     object Navigation {
-      const val navigationFragment = ("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
+        const val navigationFragment =
+            ("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
         const val navigationUI = ("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
     }
+
     const val material = "com.google.android.material:material:${Versions.material}"
     const val tomcatAnnotations = "org.apache.tomcat:annotations-api:${Versions.tomcat}"
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
-    const val preferenceDatastore = "androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"
+    const val preferenceDatastore =
+        "androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"
 
     object Versions {
         const val grpc = "1.37.0"
@@ -70,7 +70,7 @@ object Dependencies {
         const val room_version = "2.3.0"
         const val hilt = "2.34.1-beta"
         const val navigation = "2.3.5"
-        const val datastoreVersion ="1.0.0-beta01"
+        const val datastoreVersion = "1.0.0-beta01"
         const val roboElectric = "4.5.1"
     }
 }

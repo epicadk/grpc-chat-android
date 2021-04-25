@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -20,19 +19,18 @@ class MessageListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: MainActivityViewModel by activityViewModels()
     private val argument: MessageListFragmentArgs by navArgs()
-    val adapter : MessageAdapter by lazy {
+    private val adapter: MessageAdapter by lazy {
         MessageAdapter()
     }
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
-        binding.rvMessage.layoutManager= LinearLayoutManager(requireContext())
-        viewModel.messageLiveData.observe(viewLifecycleOwner,{
-            adapter.messageList =  it.map { Mapper.toProto(it) }
-
+        binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.messageLiveData.observe(viewLifecycleOwner, {
+            adapter.messageList = it.map { Mapper.toProto(it) }
         })
         binding.btMessage
             .setOnClickListener {

@@ -12,9 +12,9 @@ class AddUserFragment : DialogFragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddUserBinding.inflate(layoutInflater, container, false)
         binding.btAddUser.setOnClickListener {

@@ -19,12 +19,12 @@ class ChatListFragment : Fragment() {
 
     private val viewModel: MainActivityViewModel by activityViewModels()
     private lateinit var chatList: List<ChatPreview>
-    private val chatAdapter: ChatAdapter by lazy {ChatAdapter() }
+    private val chatAdapter: ChatAdapter by lazy { ChatAdapter() }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
         binding.fbAddChat.setOnClickListener {
@@ -34,7 +34,6 @@ class ChatListFragment : Fragment() {
         binding.rvChatList.layoutManager = LinearLayoutManager(context)
         viewModel.allChatLiveData.observe(viewLifecycleOwner, {
             chatAdapter.chatList = it
-
         })
         binding.rvChatList.adapter = chatAdapter
         return binding.root
@@ -44,5 +43,4 @@ class ChatListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
