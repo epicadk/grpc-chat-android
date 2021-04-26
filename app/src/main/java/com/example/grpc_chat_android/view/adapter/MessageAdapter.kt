@@ -8,7 +8,12 @@ import com.example.grpc_chat_android.models.Chat
 import java.util.Date
 
 class MessageAdapter() : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
-    lateinit var messageList: List<Chat.Message>
+    private lateinit var messageList: List<Chat.Message>
+
+    fun setData(data: List<Chat.Message>) {
+        messageList = data
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root)
 

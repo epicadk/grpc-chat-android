@@ -11,17 +11,22 @@ import com.example.grpc_chat_android.databinding.FragmentAddUserBinding
 class AddUserFragment : DialogFragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         _binding = FragmentAddUserBinding.inflate(layoutInflater, container, false)
+
         binding.btAddUser.setOnClickListener {
             this.findNavController().navigate(
-                AddUserFragmentDirections.actionAddUserFragment2ToMessageListFragment(binding.etAddUser.text.toString())
+                AddUserFragmentDirections
+                        .actionAddUserFragment2ToMessageListFragment(binding.etAddUser.text.toString())
             )
         }
+
         return binding.root
     }
 

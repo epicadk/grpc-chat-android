@@ -17,9 +17,11 @@ import kotlinx.coroutines.launch
 class MainActivityViewModel @Inject constructor(val repository: ChatRepository) : ViewModel() {
     val allChatLiveData = repository.chatList.asLiveData()
     val messageLiveData = repository.allChats.asLiveData()
+
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
     get() = _message
+
     fun login(loginRequest: Chat.LoginRequest) {
         ChatStub.Stub.login(loginRequest, object : StreamObserver<Chat.Message> {
             override fun onNext(value: Chat.Message?) {
@@ -53,6 +55,7 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
                 // DO nothing
             }
         })
+        // add message to local storage
         viewModelScope.launch { repository.insert(message) }
     }
 }

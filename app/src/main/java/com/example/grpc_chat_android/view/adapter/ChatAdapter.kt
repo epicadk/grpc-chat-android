@@ -9,7 +9,12 @@ import com.example.grpc_chat_android.db.entities.ChatPreview
 import com.example.grpc_chat_android.view.fragments.ChatListFragmentDirections
 
 class ChatAdapter() : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
-    lateinit var chatList: List<ChatPreview>
+    private lateinit var chatList: List<ChatPreview>
+
+    fun setData(data: List<ChatPreview>) {
+        chatList = data
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root)
 

@@ -16,12 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel: MainActivityViewModel by activityViewModels()
+
     override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.btRegister.setOnClickListener {

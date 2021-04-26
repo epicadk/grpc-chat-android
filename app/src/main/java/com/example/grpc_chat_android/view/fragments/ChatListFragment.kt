@@ -25,7 +25,7 @@ class ChatListFragment : Fragment() {
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
         binding.fbAddChat.setOnClickListener {
             this.findNavController()
@@ -33,7 +33,7 @@ class ChatListFragment : Fragment() {
         }
         binding.rvChatList.layoutManager = LinearLayoutManager(context)
         viewModel.allChatLiveData.observe(viewLifecycleOwner, {
-            chatAdapter.chatList = it
+            chatAdapter.setData(it)
         })
         binding.rvChatList.adapter = chatAdapter
         return binding.root

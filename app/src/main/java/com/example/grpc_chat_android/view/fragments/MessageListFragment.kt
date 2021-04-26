@@ -26,11 +26,11 @@ class MessageListFragment : Fragment() {
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
         viewModel.messageLiveData.observe(viewLifecycleOwner, {
-            adapter.messageList = it.map { Mapper.toProto(it) }
+            adapter.setData(it.map { Mapper.toProto(it) })
         })
         binding.btMessage
             .setOnClickListener {
