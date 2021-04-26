@@ -60,4 +60,9 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
     }
 
     fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
+
 }

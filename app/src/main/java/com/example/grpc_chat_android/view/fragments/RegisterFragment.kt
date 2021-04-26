@@ -37,6 +37,7 @@ class RegisterFragment : Fragment() {
                     binding.registerEt.text.toString()
                 )
             )
+            viewModel.deleteAll()
         }
         return binding.root
     }

@@ -14,4 +14,6 @@ class ChatRepository(private val chatDao: ChatDao) {
     suspend fun insert(message: Chat.Message) {
         chatDao.insertChat(ChatEntity(message))
     }
+
+    suspend fun deleteAll() = chatDao.deleteAll()
 }
