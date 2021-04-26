@@ -58,4 +58,6 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
         // add message to local storage
         viewModelScope.launch { repository.insert(message) }
     }
+
+    fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
 }

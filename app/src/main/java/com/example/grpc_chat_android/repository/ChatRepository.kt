@@ -9,6 +9,8 @@ class ChatRepository(private val chatDao: ChatDao) {
     val allChats: Flow<List<ChatEntity>> = chatDao.loadAllChats()
     val chatList = chatDao.loadChatPreview()
 
+    fun loadChat(sender: String) = chatDao.loadOneChat(sender)
+
     suspend fun insert(message: Chat.Message) {
         chatDao.insertChat(ChatEntity(message))
     }

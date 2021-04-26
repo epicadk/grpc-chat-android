@@ -29,7 +29,8 @@ class MessageListFragment : Fragment() {
     ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.messageLiveData.observe(viewLifecycleOwner, {
+        binding.rvMessage.adapter = adapter
+        viewModel.loadChat(argument.chatid).observe(viewLifecycleOwner, {
             adapter.setData(it.map { Mapper.toProto(it) })
         })
         binding.btMessage
@@ -39,6 +40,8 @@ class MessageListFragment : Fragment() {
                         .setSender("cool")
                         .setBody(binding.messageEt.text.toString()).build()
                 )
+                binding.messageEt.clearFocus()
+                binding.messageEt.setText("")
             }
         return binding.root
     }
