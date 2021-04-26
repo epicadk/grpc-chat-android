@@ -18,8 +18,6 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
     >
-
-        >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_user"
             android:layout_width="match_parent"
