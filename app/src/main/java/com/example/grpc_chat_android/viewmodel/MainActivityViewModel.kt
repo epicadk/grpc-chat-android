@@ -64,5 +64,4 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
-
 }

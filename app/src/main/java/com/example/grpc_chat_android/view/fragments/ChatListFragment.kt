@@ -29,7 +29,7 @@ class ChatListFragment : Fragment() {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
         binding.fbAddChat.setOnClickListener {
             this.findNavController()
-                .navigate(ChatListFragmentDirections.actionChatListFragmentToAddUserFragment2())
+                .navigate(ChatListFragmentDirections.actionChatListFragmentToAddUserFragment())
         }
         binding.rvChatList.layoutManager = LinearLayoutManager(context)
         viewModel.allChatLiveData.observe(viewLifecycleOwner, {

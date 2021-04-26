@@ -7,7 +7,8 @@ import com.example.grpc_chat_android.models.Chat
 
 @Entity(
     indices = [
-        Index(value = ["time", "chatId", "body"])
+        Index(value = ["time", "chatId", "body", "sender", "id"]),
+        Index(value = ["chatId", "body", "time", "sender", "id"])
     ]
 )
 data class ChatEntity(
