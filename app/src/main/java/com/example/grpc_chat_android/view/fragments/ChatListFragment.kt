@@ -12,7 +12,9 @@ import com.example.grpc_chat_android.databinding.FragmentChatListBinding
 import com.example.grpc_chat_android.db.entities.ChatPreview
 import com.example.grpc_chat_android.view.adapter.ChatAdapter
 import com.example.grpc_chat_android.viewmodel.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChatListFragment : Fragment() {
     private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!

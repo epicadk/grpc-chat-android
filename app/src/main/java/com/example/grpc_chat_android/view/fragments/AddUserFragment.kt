@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentAddUserBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddUserFragment : Fragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!

@@ -1,8 +1,8 @@
 package com.example.grpc_chat_android.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.grpc_chat_android.db.MessageDatabase
-import com.example.grpc_chat_android.repository.ChatRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,16 @@ object Database {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context) =
-        MessageDatabase.getDatabase(context)
-
+    fun provideDatabase(@ApplicationContext context: Context): MessageDatabase {
+        return synchronized(this) {
+            Room.databaseBuilder(
+                context.applicationContext,
+                MessageDatabase::class.java,
+                "chat_database"
+            ).fallbackToDestructiveMigration().build()
+        }
+    }
     @Singleton
     @Provides
-    fun provideRepository(messageDatabase: MessageDatabase) =
-        ChatRepository(messageDatabase.chatDao())
+    fun provideChatDao(messageDatabase: MessageDatabase) = messageDatabase.chatDao()
 }
