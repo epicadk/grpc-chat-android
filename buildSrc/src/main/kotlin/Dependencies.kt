@@ -33,9 +33,10 @@ object Dependencies {
         const val junit = "junit:junit:4.+"
         const val extJunit = "androidx.test.ext:junit:${Versions.ext_junit}"
         const val espresso_core =
-            "androidx.test.espresso_core:${Versions.espresso_core}"
+            "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
         const val junitTestRunner = "androidx.test.runner.AndroidJUnitRunner"
         const val roboElectric = "org.robolectric:robolectric:${Versions.roboElectric}"
+        const val truth = "com.google.truth:truth:${Versions.truth}"
     }
 
     object Hilt {
@@ -74,5 +75,6 @@ object Dependencies {
         const val navigation = "2.3.5"
         const val datastoreVersion = "1.0.0-beta01"
         const val roboElectric = "4.5.1"
+        const val truth = "1.1.2"
     }
 }

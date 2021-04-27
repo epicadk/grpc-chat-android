@@ -15,10 +15,10 @@ object ChatStub {
     @Provides
     @Singleton
     fun provideChannel(): Channel = ManagedChannelBuilder
-        .forAddress("192.168.1.6", 8080).usePlaintext().build()
+        .forAddress("host", 8080).usePlaintext().build()
 
     @Provides
     @Singleton
-    fun provideStub(channel: Channel) =
+    fun provideStub(channel: Channel): ChatServiceGrpc.ChatServiceStub =
         ChatServiceGrpc.newStub(channel)
 }

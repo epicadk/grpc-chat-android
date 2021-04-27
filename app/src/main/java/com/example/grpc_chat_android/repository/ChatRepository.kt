@@ -9,8 +9,8 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class ChatRepository @Inject constructor(
-  val chatDao: ChatDao,
-  val stub: ChatServiceGrpc.ChatServiceStub
+  private val chatDao: ChatDao,
+  private val stub: ChatServiceGrpc.ChatServiceStub
 ) {
 
     fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =

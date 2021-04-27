@@ -87,7 +87,7 @@ dependencies {
     implementation(Dependencies.LifeCycle.viewModel)
     implementation(Dependencies.AndroidX.fragmentKtx)
     androidTestImplementation(Dependencies.Test.extJunit)
-    // androidTestImplementation (Dependencies.Test.espresso_core)
+    androidTestImplementation(Dependencies.Test.espresso_core)
     implementation(Dependencies.Grpc.okHttp)
     implementation(Dependencies.Grpc.protobuf)
     implementation(Dependencies.Grpc.stub)
@@ -107,4 +107,6 @@ dependencies {
     implementation(Dependencies.Navigation.navigationFragment)
     implementation(Dependencies.Navigation.navigationUI)
     testImplementation(Dependencies.Test.roboElectric)
+    testImplementation(Dependencies.Test.truth)
+    androidTestImplementation(Dependencies.Test.truth)
 }
