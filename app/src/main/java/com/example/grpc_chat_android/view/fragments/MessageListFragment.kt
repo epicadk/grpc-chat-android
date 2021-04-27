@@ -13,7 +13,9 @@ import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.Mapper
 import com.example.grpc_chat_android.view.adapter.MessageAdapter
 import com.example.grpc_chat_android.viewmodel.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MessageListFragment : Fragment() {
     private var _binding: FragmentMessageListBinding? = null
     private val binding get() = _binding!!
@@ -39,6 +41,7 @@ class MessageListFragment : Fragment() {
             .setOnClickListener {
                 viewModel.sendMessage(
                     Chat.Message.newBuilder().setReciever(argument.chatid)
+                            // TODO should not be hardcoded
                         .setSender("cool")
                         .setBody(binding.messageEt.text.toString()).build()
                 )
