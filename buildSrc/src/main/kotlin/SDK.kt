@@ -1,5 +1,5 @@
 object SDK {
     const val compileSdk = 30
-    const val mindSdk = 16
+    const val minSdk = 21
     const val targetSdk = 30
 }

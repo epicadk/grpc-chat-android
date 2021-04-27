@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.grpc_chat_android"
-        minSdkVersion(SDK.mindSdk)
+        minSdkVersion(SDK.minSdk)
         targetSdkVersion(SDK.targetSdk)
         multiDexEnabled = true
         versionCode = 1
@@ -38,6 +38,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
@@ -91,6 +92,7 @@ dependencies {
     implementation(Dependencies.Grpc.protobuf)
     implementation(Dependencies.Grpc.stub)
     implementation(Dependencies.tomcatAnnotations)
+    coreLibraryDesugaring(Dependencies.libraryDesugaring)
     implementation(Dependencies.multidex)
     implementation(Dependencies.Room.roomRuntime)
     kapt(Dependencies.Room.roomCompiler)

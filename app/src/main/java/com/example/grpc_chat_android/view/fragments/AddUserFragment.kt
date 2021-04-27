@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentAddUserBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddUserFragment : DialogFragment() {
+@AndroidEntryPoint
+class AddUserFragment : Fragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!
 
@@ -23,7 +25,7 @@ class AddUserFragment : DialogFragment() {
         binding.btAddUser.setOnClickListener {
             this.findNavController().navigate(
                 AddUserFragmentDirections
-                        .actionAddUserFragment2ToMessageListFragment(binding.etAddUser.text.toString())
+                        .actionAddUserFragmentToMessageListFragment(binding.etAddUser.text.toString())
             )
         }
 

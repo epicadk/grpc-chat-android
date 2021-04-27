@@ -23,7 +23,7 @@ class ChatAdapter() : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.chatTitle.text = chatList[position].sender
-        holder.binding.chatLast.text = chatList[position].sender
+        // holder.binding.chatLast.text = chatList[position].sender
         // holder.binding.messageTime.text = Date().time.toString()
         holder.binding.root.setOnClickListener {
             it.findNavController().navigate(

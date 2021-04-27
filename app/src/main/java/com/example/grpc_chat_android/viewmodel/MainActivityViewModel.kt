@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.ChatRepository
-import com.example.grpc_chat_android.repository.ChatStub
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.grpc.stub.StreamObserver
 import javax.inject.Inject
@@ -20,10 +19,10 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
-    get() = _message
+        get() = _message
 
     fun login(loginRequest: Chat.LoginRequest) {
-        ChatStub.Stub.login(loginRequest, object : StreamObserver<Chat.Message> {
+        repository.login(loginRequest, object : StreamObserver<Chat.Message> {
             override fun onNext(value: Chat.Message?) {
                 // TODO add in rv
                 if (value != null)
@@ -43,7 +42,7 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
     }
 
     fun sendMessage(message: Chat.Message) {
-        ChatStub.Stub.sendChat(message, object : StreamObserver<Chat.Success> {
+        repository.sendMessage(message, object : StreamObserver<Chat.Success> {
             override fun onNext(value: Chat.Success?) {
             }
 
@@ -64,5 +63,4 @@ class MainActivityViewModel @Inject constructor(val repository: ChatRepository) 
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
-
 }

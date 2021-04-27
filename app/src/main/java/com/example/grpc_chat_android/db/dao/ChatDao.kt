@@ -1,6 +1,9 @@
 package com.example.grpc_chat_android.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.grpc_chat_android.db.entities.ChatEntity
 import com.example.grpc_chat_android.db.entities.ChatPreview
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +13,7 @@ interface ChatDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertChat(chat: ChatEntity)
 
-    @Delete
+    @Query("DELETE FROM ChatEntity")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM ChatEntity ")

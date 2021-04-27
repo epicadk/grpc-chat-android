@@ -1,3 +1,4 @@
+import com.diffplug.spotless.extra.wtp.EclipseWtpFormatterStep
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
@@ -17,8 +18,7 @@ fun Project.configureSpotless() {
         format("xml") {
             target("**/*.xml")
             targetExclude("**/build/", ".idea/")
-            prettier(mapOf("prettier" to "2.0.5", "@prettier/plugin-xml" to "0.13.0"))
-                .config(mapOf("parser" to "xml", "tabWidth" to 4))
+            eclipseWtp(EclipseWtpFormatterStep.XML).configFile("$rootDir/config/spotless.xml.prefs")
         }
     }
 }

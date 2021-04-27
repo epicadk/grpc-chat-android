@@ -3,30 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
-<TextView
+    android:orientation="vertical">
+
+    <TextView
         android:id="@+id/chat_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    />
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_message"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-    />
+        android:layout_weight="1" />
+
     <EditText
-        android:hint="Type message here"
         android:id="@+id/message_et"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    />
+        android:hint="Type message here"
+        android:inputType="text" />
+
     <Button
         android:id="@+id/bt_message"
-        android:text="Send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    />
+        android:text="Send" />
 </LinearLayout>
