@@ -3,20 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
-<TextView
+    android:orientation="vertical">
+
+    <TextView
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/chat_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:textSize="25sp"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:text="john"
-    />
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/chat_last"-->
-<!--    />-->
+        tools:text="john" />
+    <!-- <TextView -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:id="@+id/chat_last" -->
+    <!-- /> -->
 </LinearLayout>

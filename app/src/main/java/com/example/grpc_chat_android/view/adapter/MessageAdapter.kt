@@ -6,11 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.grpc_chat_android.databinding.ItemMessageReceivedBinding
 import com.example.grpc_chat_android.databinding.ItemMessageSentBinding
 import com.example.grpc_chat_android.models.Chat
-import java.text.DateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import java.util.Date
 
 class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

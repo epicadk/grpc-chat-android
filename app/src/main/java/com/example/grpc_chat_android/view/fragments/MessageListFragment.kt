@@ -24,9 +24,9 @@ class MessageListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())

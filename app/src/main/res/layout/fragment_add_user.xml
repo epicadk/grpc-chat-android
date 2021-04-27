@@ -4,27 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
->
+    android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:hint="Enter Chat ID"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-    >
+        android:layout_marginRight="15dp"
+        android:hint="Enter Chat ID"
+        app:counterEnabled="true"
+        app:counterMaxLength="20">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLength="20"
-        />
+            android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -35,6 +33,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_add_user"
-    />
+        app:layout_constraintTop_toBottomOf="@+id/et_add_user" />
 </LinearLayout>
