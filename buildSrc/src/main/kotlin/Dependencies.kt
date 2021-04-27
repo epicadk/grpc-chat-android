@@ -52,6 +52,7 @@ object Dependencies {
 
     const val material = "com.google.android.material:material:${Versions.material}"
     const val tomcatAnnotations = "org.apache.tomcat:annotations-api:${Versions.tomcat}"
+    const val libraryDesugaring = "com.android.tools:desugar_jdk_libs:${Versions.desugaring}"
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
     const val preferenceDatastore =
         "androidx.datastore:datastore-preferences:${Versions.datastoreVersion}"
@@ -62,6 +63,7 @@ object Dependencies {
         const val fragment = "1.3.2"
         const val kotlin = "1.4.32"
         const val espresso_core = "3.3.0"
+        const val desugaring = "1.0.9"
         const val multidex = "1.0.3"
         const val ext_junit = "1.1.2"
         const val tomcat = "6.0.53"

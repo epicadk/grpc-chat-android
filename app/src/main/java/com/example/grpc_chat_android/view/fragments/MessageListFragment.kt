@@ -22,14 +22,16 @@ class MessageListFragment : Fragment() {
     private val adapter: MessageAdapter by lazy {
         MessageAdapter()
     }
+
     override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMessage.adapter = adapter
+        adapter.setSenderId(argument.chatid)
         viewModel.loadChat(argument.chatid).observe(viewLifecycleOwner, {
             adapter.setData(it.map { Mapper.toProto(it) })
         })
