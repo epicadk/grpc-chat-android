@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.grpc_chat_android.db.MessageDatabase
 import com.example.grpc_chat_android.db.entities.ChatEntity
+import com.example.grpc_chat_android.db.entities.ChatPreview
 import com.google.common.truth.Truth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -65,10 +66,31 @@ class ChatDaoTest {
     @Test
     fun testDaoFindOne() {
         runBlocking {
-          chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
-          chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
-          val message = chatDao.loadOneChat("sender2").first()
-          Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2", 2, 1))
+            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            val message = chatDao.loadOneChat("sender2").first()
+            Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2", 2, 1))
+        }
+    }
+
+    @Test
+    fun testDaoFindOne2() {
+        runBlocking {
+            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            val message = chatDao.loadOneChat("sender3").first()
+            Truth.assertThat(message).isEmpty()
+        }
+    }
+
+    @Test
+    fun testDaoChatPreview() {
+        runBlocking {
+            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            val message = chatDao.loadChatPreview().first()
+            Truth.assertThat(message)
+                .containsExactly(ChatPreview("sender1"), ChatPreview("sender2"))
         }
     }
 }
