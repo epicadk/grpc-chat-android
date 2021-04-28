@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(val repository: ChatRepository) : ViewModel() {
   val allChatLiveData = repository.chatList.asLiveData()
-  val messageLiveData = repository.allChats.asLiveData()
 
   private val _message = MutableLiveData<String>()
   val message: LiveData<String>

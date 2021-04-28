@@ -50,20 +50,6 @@ class ChatDaoTest {
     }
 
     @Test
-    fun testDaoFind() {
-        runBlocking {
-            // TODO is this  required or can we just use chatDao.insert()?
-            database.query(
-              "Insert into ChatEntity values (1,\"message\",\"string\",1,1)",
-              arrayOf()
-            ).moveToFirst()
-            val messages = chatDao.loadAllChats().first()
-            Truth.assertThat(messages).hasSize(1)
-            Truth.assertThat(messages).containsExactly(ChatEntity(1, "message", "string", 1, 1))
-        }
-    }
-
-    @Test
     fun testDaoFindOne() {
         runBlocking {
             chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))

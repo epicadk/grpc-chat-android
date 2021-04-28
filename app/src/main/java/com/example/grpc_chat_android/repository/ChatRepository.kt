@@ -9,6 +9,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class ChatRepository
+
 @Inject
 constructor(private val chatDao: ChatDao, private val stub: ChatServiceGrpc.ChatServiceStub) {
 
@@ -17,8 +18,6 @@ constructor(private val chatDao: ChatDao, private val stub: ChatServiceGrpc.Chat
 
   fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
     stub.sendChat(message, observer)
-
-  val allChats: Flow<List<ChatEntity>> = chatDao.loadAllChats()
 
   val chatList = chatDao.loadChatPreview()
 

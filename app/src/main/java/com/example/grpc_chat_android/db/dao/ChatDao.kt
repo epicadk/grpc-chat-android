@@ -14,8 +14,6 @@ interface ChatDao {
 
   @Query("DELETE FROM ChatEntity") suspend fun deleteAll()
 
-  @Query("SELECT * FROM ChatEntity ") fun loadAllChats(): Flow<List<ChatEntity>>
-
   @Query("SELECT DISTINCT(sender) FROM ChatEntity") fun loadChatPreview(): Flow<List<ChatPreview>>
 
   @Query("SELECT * FROM ChatEntity where sender = :sender")
