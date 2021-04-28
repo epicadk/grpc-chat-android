@@ -12,13 +12,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ChatStub {
-    @Provides
-    @Singleton
-    fun provideChannel(): Channel = ManagedChannelBuilder
-        .forAddress("host", 8080).usePlaintext().build()
+  @Provides
+  @Singleton
+  fun provideChannel(): Channel =
+    ManagedChannelBuilder.forAddress("host", 8080).usePlaintext().build()
 
-    @Provides
-    @Singleton
-    fun provideStub(channel: Channel): ChatServiceGrpc.ChatServiceStub =
-        ChatServiceGrpc.newStub(channel)
+  @Provides
+  @Singleton
+  fun provideStub(channel: Channel): ChatServiceGrpc.ChatServiceStub =
+    ChatServiceGrpc.newStub(channel)
 }

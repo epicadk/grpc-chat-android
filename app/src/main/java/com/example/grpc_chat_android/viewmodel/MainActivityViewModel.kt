@@ -14,53 +14,53 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(val repository: ChatRepository) : ViewModel() {
-    val allChatLiveData = repository.chatList.asLiveData()
-    val messageLiveData = repository.allChats.asLiveData()
+  val allChatLiveData = repository.chatList.asLiveData()
+  val messageLiveData = repository.allChats.asLiveData()
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String>
-        get() = _message
+  private val _message = MutableLiveData<String>()
+  val message: LiveData<String>
+    get() = _message
 
-    fun login(loginRequest: Chat.LoginRequest) {
-        repository.login(loginRequest, object : StreamObserver<Chat.Message> {
-            override fun onNext(value: Chat.Message?) {
-                // TODO add in rv
-                if (value != null)
-                    viewModelScope.launch {
-                        repository.insert(value)
-                    }
-            }
+  fun login(loginRequest: Chat.LoginRequest) {
+    repository.login(
+      loginRequest,
+      object : StreamObserver<Chat.Message> {
+        override fun onNext(value: Chat.Message?) {
+          // TODO add in rv
+          if (value != null) viewModelScope.launch { repository.insert(value) }
+        }
 
-            override fun onError(t: Throwable?) {
-                _message.postValue(t?.message)
-            }
+        override fun onError(t: Throwable?) {
+          _message.postValue(t?.message)
+        }
 
-            override fun onCompleted() {
-                // DO nothing
-            }
-        })
-    }
+        override fun onCompleted() {
+          // DO nothing
+        }
+      }
+    )
+  }
 
-    fun sendMessage(message: Chat.Message) {
-        repository.sendMessage(message, object : StreamObserver<Chat.Success> {
-            override fun onNext(value: Chat.Success?) {
-            }
+  fun sendMessage(message: Chat.Message) {
+    repository.sendMessage(
+      message,
+      object : StreamObserver<Chat.Success> {
+        override fun onNext(value: Chat.Success?) {}
 
-            override fun onError(t: Throwable?) {
-                _message.postValue(t?.message)
-            }
+        override fun onError(t: Throwable?) {
+          _message.postValue(t?.message)
+        }
 
-            override fun onCompleted() {
-                // DO nothing
-            }
-        })
-        // add message to local storage
-        viewModelScope.launch { repository.insert(message) }
-    }
+        override fun onCompleted() {
+          // DO nothing
+        }
+      }
+    )
+    // add message to local storage
+    viewModelScope.launch { repository.insert(message) }
+  }
 
-    fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
+  fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
 
-    fun deleteAll() = viewModelScope.launch {
-        repository.deleteAll()
-    }
+  fun deleteAll() = viewModelScope.launch { repository.deleteAll() }
 }

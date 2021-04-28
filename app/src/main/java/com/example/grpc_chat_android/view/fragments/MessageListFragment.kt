@@ -17,42 +17,42 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MessageListFragment : Fragment() {
-    private var _binding: FragmentMessageListBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel: MainActivityViewModel by activityViewModels()
-    private val argument: MessageListFragmentArgs by navArgs()
-    private val adapter: MessageAdapter by lazy {
-        MessageAdapter()
-    }
+  private var _binding: FragmentMessageListBinding? = null
+  private val binding
+    get() = _binding!!
+  private val viewModel: MainActivityViewModel by activityViewModels()
+  private val argument: MessageListFragmentArgs by navArgs()
+  private val adapter: MessageAdapter by lazy { MessageAdapter() }
 
-    override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMessageListBinding.inflate(inflater, container, false)
-        binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvMessage.adapter = adapter
-        adapter.setSenderId(argument.chatid)
-        viewModel.loadChat(argument.chatid).observe(viewLifecycleOwner, {
-            adapter.setData(it.map { Mapper.toProto(it) })
-        })
-        binding.btMessage
-            .setOnClickListener {
-                viewModel.sendMessage(
-                    Chat.Message.newBuilder().setReciever(argument.chatid)
-                            // TODO should not be hardcoded
-                        .setSender("cool")
-                        .setBody(binding.messageEt.text.toString()).build()
-                )
-                binding.messageEt.clearFocus()
-                binding.messageEt.setText("")
-            }
-        return binding.root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    _binding = FragmentMessageListBinding.inflate(inflater, container, false)
+    binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
+    binding.rvMessage.adapter = adapter
+    adapter.setSenderId(argument.chatid)
+    viewModel
+      .loadChat(argument.chatid)
+      .observe(viewLifecycleOwner, { adapter.setData(it.map { Mapper.toProto(it) }) })
+    binding.btMessage.setOnClickListener {
+      viewModel.sendMessage(
+        Chat.Message.newBuilder()
+          .setReciever(argument.chatid)
+          // TODO should not be hardcoded
+          .setSender("cool")
+          .setBody(binding.messageEt.text.toString())
+          .build()
+      )
+      binding.messageEt.clearFocus()
+      binding.messageEt.setText("")
     }
+    return binding.root
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }

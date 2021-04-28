@@ -8,26 +8,25 @@ import io.grpc.stub.StreamObserver
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
-class ChatRepository @Inject constructor(
-  private val chatDao: ChatDao,
-  private val stub: ChatServiceGrpc.ChatServiceStub
-) {
+class ChatRepository
+@Inject
+constructor(private val chatDao: ChatDao, private val stub: ChatServiceGrpc.ChatServiceStub) {
 
-    fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =
-        stub.login(loginRequest, observer)
+  fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =
+    stub.login(loginRequest, observer)
 
-    fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
-        stub.sendChat(message, observer)
+  fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
+    stub.sendChat(message, observer)
 
-    val allChats: Flow<List<ChatEntity>> = chatDao.loadAllChats()
+  val allChats: Flow<List<ChatEntity>> = chatDao.loadAllChats()
 
-    val chatList = chatDao.loadChatPreview()
+  val chatList = chatDao.loadChatPreview()
 
-    fun loadChat(sender: String) = chatDao.loadOneChat(sender)
+  fun loadChat(sender: String) = chatDao.loadOneChat(sender)
 
-    suspend fun insert(message: Chat.Message) {
-        chatDao.insertChat(ChatEntity(message))
-    }
+  suspend fun insert(message: Chat.Message) {
+    chatDao.insertChat(ChatEntity(message))
+  }
 
-    suspend fun deleteAll() = chatDao.deleteAll()
+  suspend fun deleteAll() = chatDao.deleteAll()
 }

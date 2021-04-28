@@ -17,16 +17,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object Utils {
 
-    @Singleton
-    @Provides
-    fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.dataStore
-    }
+  @Singleton
+  @Provides
+  fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+    return context.dataStore
+  }
 
-    @Provides
-    fun provideStringPreferenceKey(): Preferences.Key<String> {
-        return stringPreferencesKey("user")
-    }
+  @Provides
+  fun provideStringPreferenceKey(): Preferences.Key<String> {
+    return stringPreferencesKey("user")
+  }
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")

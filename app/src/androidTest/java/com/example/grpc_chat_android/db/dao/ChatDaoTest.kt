@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.grpc_chat_android.db.MessageDatabase
 import com.example.grpc_chat_android.db.entities.ChatEntity
 import com.google.common.truth.Truth
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -32,17 +33,42 @@ class ChatDaoTest {
 
     @Test
     fun testChatDaoInsert() {
-        runBlocking {
-            chatDao
-                .insertChat(ChatEntity(1, "message", "string", 1, 1))
-        }
+        runBlocking { chatDao.insertChat(ChatEntity(1, "message", "string", 1, 1)) }
         val cursor = database.query("Select * From ChatEntity", arrayOf())
         cursor.moveToFirst()
+
         Truth.assertThat(cursor.count).isEqualTo(1)
+
         Truth.assertThat(cursor.getLong(cursor.getColumnIndexOrThrow("id"))).isEqualTo(1)
-        Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("body"))).isEqualTo("message")
-        Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("sender"))).isEqualTo("string")
+        Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("body")))
+            .isEqualTo("message")
+        Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("sender")))
+            .isEqualTo("string")
         Truth.assertThat(cursor.getLong(cursor.getColumnIndexOrThrow("chatId"))).isEqualTo(1)
         Truth.assertThat(cursor.getLong(cursor.getColumnIndexOrThrow("time"))).isEqualTo(1)
+    }
+
+    @Test
+    fun testDaoFind() {
+        runBlocking {
+            // TODO is this  required or can we just use chatDao.insert()?
+            database.query(
+              "Insert into ChatEntity values (1,\"message\",\"string\",1,1)",
+              arrayOf()
+            ).moveToFirst()
+            val messages = chatDao.loadAllChats().first()
+            Truth.assertThat(messages).hasSize(1)
+            Truth.assertThat(messages).containsExactly(ChatEntity(1, "message", "string", 1, 1))
+        }
+    }
+
+    @Test
+    fun testDaoFindOne() {
+        runBlocking {
+          chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
+          chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+          val message = chatDao.loadOneChat("sender2").first()
+          Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2", 2, 1))
+        }
     }
 }

@@ -11,29 +11,32 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddUserFragment : Fragment() {
-    private var _binding: FragmentAddUserBinding? = null
-    private val binding get() = _binding!!
+  private var _binding: FragmentAddUserBinding? = null
+  private val binding
+    get() = _binding!!
 
-    override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-    ): View {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
 
-        _binding = FragmentAddUserBinding.inflate(layoutInflater, container, false)
+    _binding = FragmentAddUserBinding.inflate(layoutInflater, container, false)
 
-        binding.btAddUser.setOnClickListener {
-            this.findNavController().navigate(
-                AddUserFragmentDirections
-                        .actionAddUserFragmentToMessageListFragment(binding.etAddUser.text.toString())
-            )
-        }
-
-        return binding.root
+    binding.btAddUser.setOnClickListener {
+      this.findNavController()
+        .navigate(
+          AddUserFragmentDirections.actionAddUserFragmentToMessageListFragment(
+            binding.etAddUser.text.toString()
+          )
+        )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    return binding.root
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }

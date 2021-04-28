@@ -14,36 +14,37 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
-    private var _binding: FragmentRegisterBinding? = null
-    private val binding get() = _binding!!
+  private var _binding: FragmentRegisterBinding? = null
+  private val binding
+    get() = _binding!!
 
-    private val viewModel: MainActivityViewModel by activityViewModels()
+  private val viewModel: MainActivityViewModel by activityViewModels()
 
-    override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        binding.btRegister.setOnClickListener {
-            viewModel.login(
-                Chat.LoginRequest.newBuilder().setUsername(binding.registerEt.text.toString())
-                    .build()
-            )
-            // TODO store this in protoDataStore or shared pref
-            findNavController().navigate(
-                RegisterFragmentDirections.actionRegisterFragmentToChatListFragment(
-                    binding.registerEt.text.toString()
-                )
-            )
-            viewModel.deleteAll()
-        }
-        return binding.root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    super.onCreateView(inflater, container, savedInstanceState)
+    _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+    binding.btRegister.setOnClickListener {
+      viewModel.login(
+        Chat.LoginRequest.newBuilder().setUsername(binding.registerEt.text.toString()).build()
+      )
+      // TODO store this in protoDataStore or shared pref
+      findNavController()
+        .navigate(
+          RegisterFragmentDirections.actionRegisterFragmentToChatListFragment(
+            binding.registerEt.text.toString()
+          )
+        )
+      viewModel.deleteAll()
     }
+    return binding.root
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }
