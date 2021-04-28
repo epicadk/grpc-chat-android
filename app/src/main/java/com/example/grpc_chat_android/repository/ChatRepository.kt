@@ -6,7 +6,6 @@ import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.models.ChatServiceGrpc
 import io.grpc.stub.StreamObserver
 import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 
 class ChatRepository
 
