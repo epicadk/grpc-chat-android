@@ -2,13 +2,10 @@ object Dependencies {
 
   object AndroidX {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.app_compat}"
-
-    // const val contraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
   }
 
   object Room {
-
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room_version}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room_version}"
@@ -46,8 +43,8 @@ object Dependencies {
 
   object Navigation {
     const val navigationFragment =
-      ("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
-    const val navigationUI = ("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
+      "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
   }
 
   const val material = "com.google.android.material:material:${Versions.material}"
