@@ -7,16 +7,24 @@ import com.example.grpc_chat_android.models.Chat
 
 @Entity(
   indices =
-    [
-      Index(value = ["time", "chatId", "body", "sender", "id"]),
-      Index(value = ["chatId", "body", "time", "sender", "id"])]
+  [
+    Index(value = ["time", "chatId", "body", "sender", "id"]),
+    Index(value = ["chatId", "body", "time", "sender", "id"])]
 )
 data class ChatEntity(
   @PrimaryKey(autoGenerate = true) val id: Long,
   val body: String,
   val sender: String,
+  val receiver: String,
   val chatId: Long,
   val time: Long
 ) {
-  constructor(message: Chat.Message) : this(0, message.body, message.sender, 0, message.sent)
+    constructor(message: Chat.Message) : this(
+      0,
+      message.body,
+      message.sender,
+      message.receiver,
+      0,
+      message.sent
+    )
 }

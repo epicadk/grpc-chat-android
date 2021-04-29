@@ -39,7 +39,7 @@ class MessageListFragment : Fragment() {
     binding.btMessage.setOnClickListener {
       viewModel.sendMessage(
         Chat.Message.newBuilder()
-          .setReciever(argument.chatid)
+          .setReceiver(argument.chatid)
           // TODO should not be hardcoded
           .setSender("cool")
           .setBody(binding.messageEt.text.toString())

@@ -29,7 +29,7 @@ class RegisterFragment : Fragment() {
     _binding = FragmentRegisterBinding.inflate(inflater, container, false)
     binding.btRegister.setOnClickListener {
       viewModel.login(
-        Chat.LoginRequest.newBuilder().setUsername(binding.registerEt.text.toString()).build()
+        Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEt.text.toString()).build()
       )
       // TODO store this in protoDataStore or shared pref
       findNavController()
