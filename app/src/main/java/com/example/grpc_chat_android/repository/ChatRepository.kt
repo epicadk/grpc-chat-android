@@ -10,9 +10,8 @@ import javax.inject.Inject
 class ChatRepository
 @Inject
 constructor(private val chatDao: ChatDao, private val stub: ChatServiceGrpc.ChatServiceStub) {
-    fun signUp(user: Chat.User, observer: StreamObserver<Chat.Success>) {
-
-    }
+    fun signUp(user: Chat.User, observer: StreamObserver<Chat.Success>) =
+        stub.register(user, observer)
 
     fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =
         stub.login(loginRequest, observer)
