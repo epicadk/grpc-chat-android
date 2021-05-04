@@ -1,0 +1,40 @@
+package com.example.grpc_chat_android.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.grpc_chat_android.models.Chat
+import com.example.grpc_chat_android.repository.ChatRepository
+import io.grpc.stub.StreamObserver
+import javax.inject.Inject
+import kotlinx.coroutines.launch
+
+class ChatViewModel @Inject constructor(private val repository: ChatRepository) : ViewModel() {
+
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String>
+        get() = _message
+
+    fun sendMessage(message: Chat.Message) {
+        repository.sendMessage(
+            message,
+            object : StreamObserver<Chat.Success> {
+                override fun onNext(value: Chat.Success?) {}
+
+                override fun onError(t: Throwable?) {
+                    _message.postValue(t?.message)
+                }
+
+                override fun onCompleted() {
+                    // DO nothing
+                }
+            }
+        )
+        // add message to local storage
+        viewModelScope.launch { repository.insert(message) }
+    }
+
+    fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
+}

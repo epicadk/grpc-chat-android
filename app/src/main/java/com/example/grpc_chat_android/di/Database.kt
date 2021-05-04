@@ -14,16 +14,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object Database {
 
-  @Singleton
-  @Provides
-  fun provideDatabase(@ApplicationContext context: Context): MessageDatabase {
-    return synchronized(this) {
-      Room.databaseBuilder(context.applicationContext, MessageDatabase::class.java, "chat_database")
-        .fallbackToDestructiveMigration()
-        .build()
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): MessageDatabase {
+        return synchronized(this) {
+            Room.databaseBuilder(context.applicationContext, MessageDatabase::class.java, "chat_database")
+                .fallbackToDestructiveMigration()
+                .build()
+        }
     }
-  }
-  @Singleton
-  @Provides
-  fun provideChatDao(messageDatabase: MessageDatabase) = messageDatabase.chatDao()
+    @Singleton
+    @Provides
+    fun provideChatDao(messageDatabase: MessageDatabase) = messageDatabase.chatDao()
 }
