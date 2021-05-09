@@ -34,7 +34,7 @@ class ChatDaoTest {
 
     @Test
     fun testChatDaoInsert() {
-        runBlocking { chatDao.insertChat(ChatEntity(1, "message", "string", 1, 1)) }
+        runBlocking { chatDao.insertChat(ChatEntity(1, "message", "string","", 1, 1)) }
         val cursor = database.query("Select * From ChatEntity", arrayOf())
         cursor.moveToFirst()
 
@@ -52,18 +52,18 @@ class ChatDaoTest {
     @Test
     fun testDaoFindOne() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            chatDao.insertChat(ChatEntity(1, "message", "sender1","", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2", "",2, 1))
             val message = chatDao.loadOneChat("sender2").first()
-            Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2", 2, 1))
+            Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2","" ,2, 1))
         }
     }
 
     @Test
     fun testDaoFindOne2() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            chatDao.insertChat(ChatEntity(1, "message", "sender1","", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2","", 2, 1))
             val message = chatDao.loadOneChat("sender3").first()
             Truth.assertThat(message).isEmpty()
         }
@@ -72,8 +72,8 @@ class ChatDaoTest {
     @Test
     fun testDaoChatPreview() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", 1, 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", 2, 1))
+            chatDao.insertChat(ChatEntity(1, "message", "sender1","", 1, 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2","", 2, 1))
             val message = chatDao.loadChatPreview().first()
             Truth.assertThat(message)
                 .containsExactly(ChatPreview("sender1"), ChatPreview("sender2"))
