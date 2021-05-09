@@ -8,13 +8,13 @@ object Mapper {
         return Chat.Message.newBuilder()
             .apply {
                 body = entity.body
-                sender = entity.sender
-                sent = entity.time
+                from = entity.sender
+                time = entity.time
             }
             .build()
     }
 
     fun fromProto(message: Chat.Message): ChatEntity {
-        return ChatEntity(0, message.body, message.sender, message.receiver, 0, message.sent)
+        return ChatEntity(0, message.body, message.from, message.to, 0, message.time)
     }
 }

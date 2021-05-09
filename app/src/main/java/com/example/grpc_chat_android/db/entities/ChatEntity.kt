@@ -22,9 +22,9 @@ data class ChatEntity(
     constructor(message: Chat.Message) : this(
         0,
         message.body,
-        message.sender,
-        message.receiver,
+        message.from,
+        message.to,
         0,
-        message.sent
+        message.time
     )
 }

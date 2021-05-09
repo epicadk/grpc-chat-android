@@ -33,7 +33,7 @@ class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root)
 
     override fun getItemViewType(position: Int): Int {
-        return when (messageList[position].sender) {
+        return when (messageList[position].from) {
             senderId -> VIEW_TYPE_MESSAGE_RECEIVED
             else -> VIEW_TYPE_MESSAGE_SENT
         }

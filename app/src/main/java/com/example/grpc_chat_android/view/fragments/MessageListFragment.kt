@@ -51,9 +51,9 @@ class MessageListFragment : Fragment() {
         binding.btMessage.setOnClickListener {
             viewModel.sendMessage(
                 Chat.Message.newBuilder()
-                    .setReceiver(argument.senderId)
+                    .setTo(argument.senderId)
                     // TODO should not be hardcoded
-                    .setSender(userId)
+                    .setFrom(userId)
                     .setBody(binding.messageEt.text.toString())
                     .build()
             )
