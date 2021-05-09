@@ -13,15 +13,29 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Enter Username"
-        app:counterEnabled="true"
-        app:counterMaxLength="20">
+        android:hint="Enter Username">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/register_et"
+            android:id="@+id/register_et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:maxLength="20" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberPassword"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 

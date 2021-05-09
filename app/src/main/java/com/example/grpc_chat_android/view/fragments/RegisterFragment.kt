@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentRegisterBinding
@@ -22,7 +22,7 @@ class RegisterFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: LoginViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     @Inject
     lateinit var key: Preferences.Key<String>
@@ -36,16 +36,16 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.btRegister.setOnClickListener {
             viewModel.login(
-                Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEt.text.toString())
-                    .build()
+                Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEtUsername.text.toString())
+                    .setPassword(binding.registerEtPassword.toString()).build()
             )
             lifecycleScope.launch {
-                viewModel.saveUser(binding.registerEt.text.toString(), requireContext(), key)
+                viewModel.saveUser(binding.registerEtUsername.text.toString(), requireContext(), key)
             }
             findNavController()
                 .navigate(
                     RegisterFragmentDirections.actionRegisterFragmentToChatListFragment(
-                        binding.registerEt.text.toString()
+                        binding.registerEtUsername.text.toString()
                     )
                 )
             viewModel.deleteAll()
