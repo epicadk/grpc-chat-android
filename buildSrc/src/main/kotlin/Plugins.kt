@@ -27,7 +27,7 @@ object Plugins {
         const val protoc = "com.google.protobuf:protoc:${Versions.protoc}"
     }
     object Versions {
-        const val androidGradlePlugin = "4.1.3"
+        const val androidGradlePlugin = "4.2.0"
         const val protobufGradlePlugin = "0.8.15"
         const val javaLiteProtogen = "3.0.0"
         const val grpcJava = "1.37.0"
