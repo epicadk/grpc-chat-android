@@ -7,5 +7,5 @@ import com.example.grpc_chat_android.db.entities.ChatEntity
 
 @Database(entities = [ChatEntity::class], version = 3, exportSchema = false)
 abstract class MessageDatabase : RoomDatabase() {
-  abstract fun chatDao(): ChatDao
+    abstract fun chatDao(): ChatDao
 }

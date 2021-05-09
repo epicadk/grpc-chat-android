@@ -16,32 +16,32 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChatListFragment : Fragment() {
-  private var _binding: FragmentChatListBinding? = null
-  private val binding
-    get() = _binding!!
+    private var _binding: FragmentChatListBinding? = null
+    private val binding
+        get() = _binding!!
 
-  private val viewModel: MainActivityViewModel by activityViewModels()
-  private lateinit var chatList: List<ChatPreview>
-  private val chatAdapter: ChatAdapter by lazy { ChatAdapter() }
+    private val viewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var chatList: List<ChatPreview>
+    private val chatAdapter: ChatAdapter by lazy { ChatAdapter() }
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    _binding = FragmentChatListBinding.inflate(inflater, container, false)
-    binding.fbAddChat.setOnClickListener {
-      this.findNavController()
-        .navigate(ChatListFragmentDirections.actionChatListFragmentToAddUserFragment())
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentChatListBinding.inflate(inflater, container, false)
+        binding.fbAddChat.setOnClickListener {
+            this.findNavController()
+                .navigate(ChatListFragmentDirections.actionChatListFragmentToNewChatFragment())
+        }
+        binding.rvChatList.layoutManager = LinearLayoutManager(context)
+        viewModel.allChatLiveData.observe(viewLifecycleOwner, { chatAdapter.setData(it) })
+        binding.rvChatList.adapter = chatAdapter
+        return binding.root
     }
-    binding.rvChatList.layoutManager = LinearLayoutManager(context)
-    viewModel.allChatLiveData.observe(viewLifecycleOwner, { chatAdapter.setData(it) })
-    binding.rvChatList.adapter = chatAdapter
-    return binding.root
-  }
 
-  override fun onDestroyView() {
-    super.onDestroyView()
-    _binding = null
-  }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

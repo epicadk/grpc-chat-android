@@ -15,8 +15,8 @@
             android:id="@+id/action_chatListFragment_to_messageListFragment"
             app:destination="@id/messageListFragment" />
         <action
-            android:id="@+id/action_chatListFragment_to_addUserFragment"
-            app:destination="@id/addUserFragment" />
+            android:id="@+id/action_chatListFragment_to_newChatFragment"
+            app:destination="@id/newChatFragment" />
         <argument
             android:name="User"
             app:argType="string" />
@@ -27,7 +27,7 @@
         android:label="MessageListFragment"
         tools:layout="@layout/fragment_message_list">
         <argument
-            android:name="chatid"
+            android:name="senderId"
             android:defaultValue="0"
             app:argType="string" />
         <action
@@ -35,14 +35,14 @@
             app:destination="@id/chatListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addUserFragment"
-        android:name="com.example.grpc_chat_android.view.fragments.AddUserFragment"
-        android:label="AddUserFragment"
-        tools:layout="@layout/fragment_add_user">
+        android:id="@+id/newChatFragment"
+        android:name="com.example.grpc_chat_android.view.fragments.NewChatFragment"
+        android:label="NewChatFragment"
+        tools:layout="@layout/fragment_new_chat">
         <action
-            android:id="@+id/action_addUserFragment_to_messageListFragment"
+            android:id="@+id/action_newChatFragment_to_messageListFragment"
             app:destination="@id/messageListFragment"
-            app:popUpTo="@id/addUserFragment"
+            app:popUpTo="@id/newChatFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
