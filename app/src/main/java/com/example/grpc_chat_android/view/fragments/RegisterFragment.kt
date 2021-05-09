@@ -34,6 +34,9 @@ class RegisterFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        binding.btSignup.setOnClickListener {
+            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToSignUpFragment())
+        }
         binding.btRegister.setOnClickListener {
             viewModel.login(
                 Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEtUsername.text.toString())
