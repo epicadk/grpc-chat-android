@@ -15,7 +15,7 @@ object ChatStub {
     @Provides
     @Singleton
     fun provideChannel(): Channel =
-        ManagedChannelBuilder.forAddress("host", 8080).usePlaintext().build()
+        ManagedChannelBuilder.forAddress("192.168.1.6", 8080).usePlaintext().build()
 
     @Provides
     @Singleton

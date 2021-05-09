@@ -7,10 +7,12 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.ChatRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.grpc.stub.StreamObserver
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class ChatViewModel @Inject constructor(private val repository: ChatRepository) : ViewModel() {
 
     private val _message = MutableLiveData<String>()

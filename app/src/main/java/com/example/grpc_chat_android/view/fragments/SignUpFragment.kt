@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.grpc_chat_android.databinding.FragmentSignupBinding
 import com.example.grpc_chat_android.viewmodel.SignUpViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding
@@ -22,7 +24,7 @@ class SignUpFragment : Fragment() {
     ): View {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
         binding.btSignup.setOnClickListener {
-            viewModel.SignUp(binding.signupEtUsername.toString(), binding.signupEtPassword.toString())
+            viewModel.SignUp(binding.signupEtPhoneNumber.text.toString(), binding.signupEtPassword.text.toString())
         }
         viewModel.message.observe(viewLifecycleOwner, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()

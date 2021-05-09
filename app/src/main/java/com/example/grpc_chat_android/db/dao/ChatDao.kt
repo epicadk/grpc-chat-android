@@ -19,6 +19,6 @@ interface ChatDao {
     @Query("SELECT DISTINCT(sender) FROM ChatEntity")
     fun loadChatPreview(): Flow<List<ChatPreview>>
 
-    @Query("SELECT * FROM ChatEntity where sender = :sender")
+    @Query("SELECT * FROM ChatEntity WHERE sender = :sender OR receiver =:sender")
     fun loadOneChat(sender: String): Flow<List<ChatEntity>>
 }

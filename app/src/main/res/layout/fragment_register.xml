@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Enter Username">
+        android:hint="Enter Phone Number">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/register_et_username"
+            android:id="@+id/register_et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,7 +36,7 @@
             android:id="@+id/register_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
     <LinearLayout

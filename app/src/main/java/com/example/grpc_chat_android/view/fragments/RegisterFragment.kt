@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentRegisterBinding
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.viewmodel.LoginViewModel
+import com.example.grpc_chat_android.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -23,6 +25,7 @@ class RegisterFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel: LoginViewModel by viewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     @Inject
     lateinit var key: Preferences.Key<String>
@@ -38,17 +41,17 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToSignUpFragment())
         }
         binding.btRegister.setOnClickListener {
-            viewModel.login(
-                Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEtUsername.text.toString())
-                    .setPassword(binding.registerEtPassword.toString()).build()
+            activityViewModel.login(
+                Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEtPhoneNumber.text.toString())
+                    .setPassword(binding.registerEtPassword.text.toString()).build()
             )
             lifecycleScope.launch {
-                viewModel.saveUser(binding.registerEtUsername.text.toString(), requireContext(), key)
+                viewModel.saveUser(binding.registerEtPhoneNumber.text.toString(), requireContext(), key)
             }
             findNavController()
                 .navigate(
                     RegisterFragmentDirections.actionRegisterFragmentToChatListFragment(
-                        binding.registerEtUsername.text.toString()
+                        binding.registerEtPhoneNumber.text.toString()
                     )
                 )
             viewModel.deleteAll()

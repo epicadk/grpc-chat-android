@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Enter Username"
+        android:hint="Enter Phone Number"
         app:counterEnabled="true"
         app:counterMaxLength="20">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signup_et_username"
+            android:id="@+id/signup_et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -37,7 +37,7 @@
             android:id="@+id/signup_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +52,7 @@
             android:id="@+id/signup_et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
     <Button

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +26,7 @@ class MessageListFragment : Fragment() {
     private var _binding: FragmentMessageListBinding? = null
     private val binding
         get() = _binding!!
-    private val viewModel: ChatViewModel by activityViewModels()
+    private val viewModel: ChatViewModel by viewModels()
     private val argument: MessageListFragmentArgs by navArgs()
     private val adapter: MessageAdapter by lazy { MessageAdapter() }
 
