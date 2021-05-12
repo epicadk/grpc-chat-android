@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:maxLength="20" />
+            android:maxLength="10" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        app:passwordToggleEnabled="true"
         android:hint="Password">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -38,17 +40,21 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:maxLength="20" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/bt_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.Button"
             android:text="Submit" />
 
         <Button
@@ -56,6 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            style="@style/Widget.MaterialComponents.Button"
             android:text="Sign Up" />
     </LinearLayout>
+
 </LinearLayout>

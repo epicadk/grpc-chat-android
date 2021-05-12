@@ -13,6 +13,7 @@ object Dependencies {
 
     object Grpc {
         const val okHttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
+        const val grpc_android = "io.grpc:grpc-android:${Versions.grpc}"
         const val protobuf = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
         const val stub = "io.grpc:grpc-stub:${Versions.grpc}"
     }

@@ -50,9 +50,10 @@ protobuf {
 
     generateProtoTasks {
         all().forEach { task ->
-            task.builtins { java {} }
-            task.plugins {
+            task.builtins {
                 id("java") { option("lite") }
+            }
+            task.plugins {
                 id("grpc") { option("lite") }
             }
         }
@@ -70,6 +71,7 @@ dependencies {
     androidTestImplementation(Dependencies.Test.extJunit)
     androidTestImplementation(Dependencies.Test.espresso_core)
     implementation(Dependencies.Grpc.okHttp)
+    implementation(Dependencies.Grpc.grpc_android)
     implementation(Dependencies.Grpc.protobuf)
     implementation(Dependencies.Grpc.stub)
     implementation(Dependencies.tomcatAnnotations)

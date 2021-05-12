@@ -10,21 +10,21 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.grpc_chat_android.databinding.FragmentRegisterBinding
+import com.example.grpc_chat_android.databinding.FragmentLoginBinding
 import com.example.grpc_chat_android.models.Chat
-import com.example.grpc_chat_android.viewmodel.LoginViewModel
 import com.example.grpc_chat_android.viewmodel.MainActivityViewModel
+import com.example.grpc_chat_android.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
-    private var _binding: FragmentRegisterBinding? = null
+class LoginFragment : Fragment() {
+    private var _binding: FragmentLoginBinding? = null
     private val binding
         get() = _binding!!
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels()
     private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     @Inject
@@ -36,24 +36,29 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.btSignup.setOnClickListener {
-            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToSignUpFragment())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
         }
         binding.btRegister.setOnClickListener {
             activityViewModel.login(
-                Chat.LoginRequest.newBuilder().setPhonenumber(binding.registerEtPhoneNumber.text.toString())
+                Chat.LoginRequest.newBuilder()
+                    .setPhonenumber(binding.registerEtPhoneNumber.text.toString())
                     .setPassword(binding.registerEtPassword.text.toString()).build()
             )
             lifecycleScope.launch {
-                viewModel.saveUser(binding.registerEtPhoneNumber.text.toString(), requireContext(), key)
-            }
-            findNavController()
-                .navigate(
-                    RegisterFragmentDirections.actionRegisterFragmentToChatListFragment(
-                        binding.registerEtPhoneNumber.text.toString()
-                    )
+                viewModel.saveUserPhone(
+                    binding.registerEtPhoneNumber.text.toString(),
+                    requireContext(),
+                    key
                 )
+                findNavController()
+                    .navigate(
+                        LoginFragmentDirections.actionLoginFragmentToChatListFragment(
+                            binding.registerEtPhoneNumber.text.toString()
+                        )
+                    )
+            }
             viewModel.deleteAll()
         }
         return binding.root

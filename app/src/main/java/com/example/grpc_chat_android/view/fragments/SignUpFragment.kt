@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentSignupBinding
-import com.example.grpc_chat_android.viewmodel.SignUpViewModel
+import com.example.grpc_chat_android.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
+
     private var _binding: FragmentSignupBinding? = null
     private val binding
         get() = _binding!!
-    val viewModel: SignUpViewModel by viewModels()
+    val viewModel: SignInViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,10 +27,20 @@ class SignUpFragment : Fragment() {
     ): View {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
         binding.btSignup.setOnClickListener {
-            viewModel.SignUp(binding.signupEtPhoneNumber.text.toString(), binding.signupEtPassword.text.toString())
+            viewModel.signUp(
+                binding.signupEtPhoneNumber.text.toString(),
+                binding.signupEtPassword.text.toString()
+            )
         }
         viewModel.message.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            // Temporary workaround with string matching
+            when (it) {
+                "Great Success" -> {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+                }
+                else -> Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
         })
         return binding.root
     }

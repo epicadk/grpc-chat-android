@@ -21,23 +21,21 @@ class MainActivityViewModel @Inject constructor(private val repository: ChatRepo
         get() = _message
 
     fun login(loginRequest: Chat.LoginRequest) {
-        repository.login(
-            loginRequest,
-            object : StreamObserver<Chat.Message> {
-                override fun onNext(value: Chat.Message?) {
-                    // TODO add in rv
-                    if (value != null) viewModelScope.launch { repository.insert(value) }
-                }
-
-                override fun onError(t: Throwable?) {
-                    _message.postValue(t?.message)
-                }
-
-                override fun onCompleted() {
-                    // DO nothing
+        repository.login(loginRequest, object : StreamObserver<Chat.Message> {
+            override fun onNext(value: Chat.Message?) {
+                if (value != null) viewModelScope.launch {
+                    repository.insert(value, value.from, value.time)
                 }
             }
-        )
+
+            override fun onError(t: Throwable?) {
+                _message.postValue(t?.message)
+            }
+
+            override fun onCompleted() {
+                // DO nothing
+            }
+        })
     }
 
     val allChatLiveData = repository.chatList.asLiveData()

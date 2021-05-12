@@ -24,12 +24,11 @@ class NewChatFragment : Fragment() {
         _binding = FragmentNewChatBinding.inflate(layoutInflater, container, false)
 
         binding.btAddUser.setOnClickListener {
-            this.findNavController()
-                .navigate(
-                    NewChatFragmentDirections.actionNewChatFragmentToMessageListFragment(
-                        binding.etAddUser.text.toString()
-                    )
+            findNavController().navigate(
+                NewChatFragmentDirections.actionNewChatFragmentToMessageListFragment(
+                    binding.etAddUser.text.toString()
                 )
+            )
         }
 
         return binding.root

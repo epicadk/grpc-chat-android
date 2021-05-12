@@ -19,7 +19,7 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
     val message: LiveData<String>
         get() = _message
 
-    fun sendMessage(message: Chat.Message) {
+    fun sendMessage(message: Chat.Message, otherUser: String, time: Long) {
         repository.sendMessage(
             message,
             object : StreamObserver<Chat.Success> {
@@ -35,8 +35,8 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
             }
         )
         // add message to local storage
-        viewModelScope.launch { repository.insert(message) }
+        viewModelScope.launch { repository.insert(message, otherUser, time) }
     }
 
-    fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
+    fun loadChat(chatId: String) = repository.loadChat(chatId).asLiveData()
 }

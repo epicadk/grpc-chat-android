@@ -22,14 +22,14 @@ class ChatAdapter() : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
         ViewHolder(ItemChatBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.chatTitle.text = chatList[position].sender
+        holder.binding.chatTitle.text = chatList[position].chatId
         // holder.binding.chatLast.text = chatList[position].sender
         // holder.binding.messageTime.text = Date().time.toString()
         holder.binding.root.setOnClickListener {
             it.findNavController()
                 .navigate(
                     ChatListFragmentDirections.actionChatListFragmentToMessageListFragment(
-                        chatList[position].sender
+                        chatList[position].chatId
                     )
                 )
         }
