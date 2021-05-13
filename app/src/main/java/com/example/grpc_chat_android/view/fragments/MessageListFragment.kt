@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.doOnTextChanged
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -59,6 +60,9 @@ class MessageListFragment : Fragment() {
         adapter.setOtherUserPhone(argument.otherUserPhone)
         viewModel.loadChat(argument.otherUserPhone)
             .observe(viewLifecycleOwner, { adapter.setData(it.map { Mapper.toProto(it) }) })
+        binding.messageEt.doOnTextChanged { text, _, _, _ ->
+            binding.btMessage.isEnabled = text.toString().isNotBlank()
+        }
         binding.btMessage.setOnClickListener {
             viewModel.sendMessage(
                 Chat.Message.newBuilder()

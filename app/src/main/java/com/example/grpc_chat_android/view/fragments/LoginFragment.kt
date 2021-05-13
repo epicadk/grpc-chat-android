@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -37,25 +38,37 @@ class LoginFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
         binding.btSignup.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
         }
-        binding.btRegister.setOnClickListener {
+
+        binding.loginEtPassword.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    binding.btLogin.callOnClick()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.btLogin.setOnClickListener {
             activityViewModel.login(
                 Chat.LoginRequest.newBuilder()
-                    .setPhonenumber(binding.registerEtPhoneNumber.text.toString())
-                    .setPassword(binding.registerEtPassword.text.toString()).build()
+                    .setPhonenumber(binding.loginEtPhone.text.toString())
+                    .setPassword(binding.loginEtPassword.text.toString()).build()
             )
             lifecycleScope.launch {
                 viewModel.saveUserPhone(
-                    binding.registerEtPhoneNumber.text.toString(),
+                    binding.loginEtPhone.text.toString(),
                     requireContext(),
                     key
                 )
                 findNavController()
                     .navigate(
                         LoginFragmentDirections.actionLoginFragmentToChatListFragment(
-                            binding.registerEtPhoneNumber.text.toString()
+                            binding.loginEtPhone.text.toString()
                         )
                     )
             }

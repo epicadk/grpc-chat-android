@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +21,8 @@
             android:id="@+id/signup_et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="phone"
+            android:imeOptions="actionNext"
             android:maxLength="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        app:passwordToggleEnabled="true"
+        app:endIconMode="password_toggle"
         android:hint="Password">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:imeOptions="actionNext"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        app:passwordToggleEnabled="true"
+        app:endIconMode="password_toggle"
         android:hint="Confirm Password">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -56,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:imeOptions="actionDone"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 

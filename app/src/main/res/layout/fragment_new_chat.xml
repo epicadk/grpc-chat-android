@@ -21,7 +21,8 @@
             android:id="@+id/et_add_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="phone"
+            android:imeOptions="actionDone"
             android:maxLength="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
