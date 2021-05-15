@@ -22,15 +22,30 @@ class SignInViewModel @Inject constructor(private val repository: ChatRepository
     val message: LiveData<String>
         get() = _message
 
+    fun login(loginRequest: Chat.LoginRequest) {
+        repository.login(loginRequest, object : StreamObserver<Chat.Success> {
+            override fun onNext(value: Chat.Success?) {
+                _message.postValue("Login Successful")
+            }
+
+            override fun onError(t: Throwable?) {
+                _message.postValue("Login Failed")
+            }
+
+            override fun onCompleted() {
+            }
+        })
+    }
+
     fun signUp(username: String, password: String) {
         val user = Chat.User.newBuilder().setPhonenumber(username).setPassword(password).build()
         repository.signUp(user, object : StreamObserver<Chat.Success> {
             override fun onNext(value: Chat.Success?) {
-                _message.postValue("Great Success")
+                _message.postValue("User Registered")
             }
 
             override fun onError(t: Throwable?) {
-                _message.postValue("something went wrong")
+                _message.postValue("Registration failed")
             }
 
             override fun onCompleted() {

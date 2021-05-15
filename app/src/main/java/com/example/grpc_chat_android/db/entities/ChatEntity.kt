@@ -19,12 +19,12 @@ data class ChatEntity(
     val chatId: String?,
     val time: Long
 ) {
-    constructor(message: Chat.Message, otherUser: String, timeMillis: Long) : this(
+    constructor(message: Chat.Message, chatId: String, timeMillis: Long) : this(
         0,
         message.body,
         message.from,
         message.to,
-        otherUser,
+        chatId,
         timeMillis
     )
 }

@@ -47,7 +47,7 @@ class SignUpFragment : Fragment() {
         viewModel.message.observe(viewLifecycleOwner, {
             // Temporary workaround with string matching
             when (it) {
-                "Great Success" -> {
+                "User Registered" -> {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
                 }

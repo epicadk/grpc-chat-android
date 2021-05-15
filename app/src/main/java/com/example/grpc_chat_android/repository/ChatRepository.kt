@@ -14,8 +14,11 @@ class ChatRepository @Inject constructor(
     fun signUp(user: Chat.User, observer: StreamObserver<Chat.Success>) =
         stub.register(user, observer)
 
-    fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =
+    fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Success>) =
         stub.login(loginRequest, observer)
+
+    fun connect(phone: Chat.Phone, observer: StreamObserver<Chat.Message>) =
+        stub.connect(phone, observer)
 
     fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
         stub.sendChat(message, observer)
@@ -24,8 +27,8 @@ class ChatRepository @Inject constructor(
 
     fun loadChat(chatId: String) = chatDao.loadOneChat(chatId)
 
-    suspend fun insert(message: Chat.Message, otherUser: String, time: Long) {
-        chatDao.insertChat(ChatEntity(message, otherUser, time))
+    suspend fun insert(message: Chat.Message, chatId: String, time: Long) {
+        chatDao.insertChat(ChatEntity(message, chatId, time))
     }
 
     suspend fun deleteAll() = chatDao.deleteAll()
