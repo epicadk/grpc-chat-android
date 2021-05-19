@@ -19,24 +19,40 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
     val message: LiveData<String>
         get() = _message
 
-    fun sendMessage(message: Chat.Message) {
-        repository.sendMessage(
-            message,
-            object : StreamObserver<Chat.Success> {
-                override fun onNext(value: Chat.Success?) {}
-
-                override fun onError(t: Throwable?) {
-                    _message.postValue(t?.message)
-                }
-
-                override fun onCompleted() {
-                    // DO nothing
+    fun connect(phone: Chat.Phone) {
+        repository.connect(phone, object : StreamObserver<Chat.Message> {
+            override fun onNext(value: Chat.Message?) {
+                if (value != null) viewModelScope.launch {
+                    repository.insert(value, value.from, value.time)
                 }
             }
-        )
-        // add message to local storage
-        viewModelScope.launch { repository.insert(message) }
+
+            override fun onError(t: Throwable?) {
+                _message.postValue(t?.message)
+            }
+
+            override fun onCompleted() {
+            }
+        })
     }
 
-    fun loadChat(sender: String) = repository.loadChat(sender).asLiveData()
+    val allChatLiveData = repository.chatList.asLiveData()
+
+    fun sendMessage(message: Chat.Message, otherUser: String, time: Long) {
+        repository.sendMessage(message, object : StreamObserver<Chat.Success> {
+            override fun onNext(value: Chat.Success?) {}
+
+            override fun onError(t: Throwable?) {
+                _message.postValue(t?.message)
+            }
+
+            override fun onCompleted() {
+                // DO nothing
+            }
+        })
+        // add message to local storage
+        viewModelScope.launch { repository.insert(message, otherUser, time) }
+    }
+
+    fun loadChat(chatId: String) = repository.loadChat(chatId).asLiveData()
 }

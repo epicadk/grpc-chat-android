@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentNewChatBinding
@@ -23,13 +24,22 @@ class NewChatFragment : Fragment() {
 
         _binding = FragmentNewChatBinding.inflate(layoutInflater, container, false)
 
+        binding.etAddUser.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    binding.btAddUser.callOnClick()
+                    true
+                }
+                else -> false
+            }
+        }
+
         binding.btAddUser.setOnClickListener {
-            this.findNavController()
-                .navigate(
-                    NewChatFragmentDirections.actionNewChatFragmentToMessageListFragment(
-                        binding.etAddUser.text.toString()
-                    )
+            findNavController().navigate(
+                NewChatFragmentDirections.actionNewChatFragmentToMessageListFragment(
+                    binding.etAddUser.text.toString()
                 )
+            )
         }
 
         return binding.root

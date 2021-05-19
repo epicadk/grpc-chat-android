@@ -7,24 +7,28 @@ import com.example.grpc_chat_android.models.ChatServiceGrpc
 import io.grpc.stub.StreamObserver
 import javax.inject.Inject
 
-class ChatRepository
-@Inject
-constructor(private val chatDao: ChatDao, private val stub: ChatServiceGrpc.ChatServiceStub) {
+class ChatRepository @Inject constructor(
+    private val chatDao: ChatDao,
+    private val stub: ChatServiceGrpc.ChatServiceStub
+) {
     fun signUp(user: Chat.User, observer: StreamObserver<Chat.Success>) =
         stub.register(user, observer)
 
-    fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Message>) =
+    fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.Success>) =
         stub.login(loginRequest, observer)
+
+    fun connect(phone: Chat.Phone, observer: StreamObserver<Chat.Message>) =
+        stub.connect(phone, observer)
 
     fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
         stub.sendChat(message, observer)
 
     val chatList = chatDao.loadChatPreview()
 
-    fun loadChat(sender: String) = chatDao.loadOneChat(sender)
+    fun loadChat(chatId: String) = chatDao.loadOneChat(chatId)
 
-    suspend fun insert(message: Chat.Message) {
-        chatDao.insertChat(ChatEntity(message))
+    suspend fun insert(message: Chat.Message, chatId: String, time: Long) {
+        chatDao.insertChat(ChatEntity(message, chatId, time))
     }
 
     suspend fun deleteAll() = chatDao.deleteAll()

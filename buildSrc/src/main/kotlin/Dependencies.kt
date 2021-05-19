@@ -13,6 +13,7 @@ object Dependencies {
 
     object Grpc {
         const val okHttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
+        const val grpc_android = "io.grpc:grpc-android:${Versions.grpc}"
         const val protobuf = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
         const val stub = "io.grpc:grpc-stub:${Versions.grpc}"
     }
@@ -60,7 +61,7 @@ object Dependencies {
         const val fragment = "1.3.2"
         const val kotlin = "1.4.32"
         const val espresso_core = "3.3.0"
-        const val desugaring = "1.0.9"
+        const val desugaring = "1.1.5"
         const val multidex = "1.0.3"
         const val ext_junit = "1.1.2"
         const val tomcat = "6.0.53"

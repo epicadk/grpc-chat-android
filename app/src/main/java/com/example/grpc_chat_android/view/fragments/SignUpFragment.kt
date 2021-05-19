@@ -4,30 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.grpc_chat_android.databinding.FragmentSignupBinding
-import com.example.grpc_chat_android.viewmodel.SignUpViewModel
+import com.example.grpc_chat_android.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
+
     private var _binding: FragmentSignupBinding? = null
     private val binding
         get() = _binding!!
-    val viewModel: SignUpViewModel by viewModels()
+    val viewModel: SignInViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
+
+        binding.signupEtConfirmPassword.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    binding.btSignup.callOnClick()
+                    true
+                }
+                else -> false
+            }
+        }
+
         binding.btSignup.setOnClickListener {
-            viewModel.SignUp(binding.signupEtPhoneNumber.text.toString(), binding.signupEtPassword.text.toString())
+            viewModel.signUp(
+                binding.signupEtPhoneNumber.text.toString(),
+                binding.signupEtPassword.text.toString()
+            )
         }
         viewModel.message.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            // Temporary workaround with string matching
+            when (it) {
+                "User Registered" -> {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+                }
+                else -> Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
         })
         return binding.root
     }

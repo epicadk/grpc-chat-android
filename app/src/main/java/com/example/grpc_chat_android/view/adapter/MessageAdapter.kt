@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.grpc_chat_android.databinding.ItemMessageReceivedBinding
 import com.example.grpc_chat_android.databinding.ItemMessageSentBinding
 import com.example.grpc_chat_android.models.Chat
-import java.time.LocalTime
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -15,10 +17,10 @@ class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
     private lateinit var messageList: List<Chat.Message>
-    private lateinit var senderId: String
+    private lateinit var otherUserPhone: String
 
-    fun setSenderId(chatId: String) {
-        senderId = chatId
+    fun setOtherUserPhone(phone: String) {
+        otherUserPhone = phone
     }
 
     fun setData(data: List<Chat.Message>) {
@@ -34,7 +36,7 @@ class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (messageList[position].from) {
-            senderId -> VIEW_TYPE_MESSAGE_RECEIVED
+            otherUserPhone -> VIEW_TYPE_MESSAGE_RECEIVED
             else -> VIEW_TYPE_MESSAGE_SENT
         }
     }
@@ -60,15 +62,19 @@ class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             VIEW_TYPE_MESSAGE_RECEIVED -> {
                 (holder as ReceivedMessageHolder).apply {
                     binding.bodyReceivedMessage.text = messageList[position].body
-                    binding.timeReceivedMessage.text =
-                        LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
+                    binding.timeReceivedMessage.text = LocalDateTime.ofInstant(
+                        Instant.ofEpochMilli(messageList[position].time),
+                        ZoneId.systemDefault()
+                    ).format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
                 }
             }
             VIEW_TYPE_MESSAGE_SENT -> {
                 (holder as SentMessageHolder).apply {
                     binding.bodySentMessage.text = messageList[position].body
-                    binding.timeSentMessage.text =
-                        LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
+                    binding.timeSentMessage.text = LocalDateTime.ofInstant(
+                        Instant.ofEpochMilli(messageList[position].time),
+                        ZoneId.systemDefault()
+                    ).format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
                 }
             }
         }
