@@ -67,7 +67,6 @@ class LoginFragment : Fragment() {
                     lifecycleScope.launch {
                         viewModel.saveUserPhone(
                             binding.loginEtPhone.text.toString(),
-                            requireContext(),
                             key
                         )
                         findNavController().navigate(
