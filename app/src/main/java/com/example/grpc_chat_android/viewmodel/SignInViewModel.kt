@@ -1,6 +1,5 @@
 package com.example.grpc_chat_android.viewmodel
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val repository: ChatRepository,private val dataStore: DataStore<Preferences> ) : ViewModel() {
+class SignInViewModel @Inject constructor(private val repository: ChatRepository, private val dataStore: DataStore<Preferences>) : ViewModel() {
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
@@ -65,8 +64,8 @@ class SignInViewModel @Inject constructor(private val repository: ChatRepository
         }
     }
 
-    suspend fun saveToken(token : String){
-        dataStore.edit {jwt ->
+    suspend fun saveToken(token: String) {
+        dataStore.edit { jwt ->
             jwt[stringPreferencesKey("jwtToken")] = token
         }
     }
