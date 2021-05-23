@@ -9,7 +9,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.grpc.ManagedChannel
 import io.grpc.android.AndroidChannelBuilder
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module

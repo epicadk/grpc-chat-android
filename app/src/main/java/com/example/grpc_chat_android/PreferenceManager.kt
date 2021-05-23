@@ -4,9 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import kotlinx.coroutines.flow.first
 
 class PreferenceManager @Inject constructor(private val datastore: DataStore<Preferences>) {
     private val usernameKey = stringPreferencesKey("username")
@@ -24,11 +23,11 @@ class PreferenceManager @Inject constructor(private val datastore: DataStore<Pre
         }
     }
 
-    suspend fun getUserPhone() : String? {
+    suspend fun getUserPhone(): String? {
         return datastore.data.first()[usernameKey]
     }
 
-    suspend fun getToken() : String? {
+    suspend fun getToken(): String? {
         return datastore.data.first()[tokenKey]
     }
 }

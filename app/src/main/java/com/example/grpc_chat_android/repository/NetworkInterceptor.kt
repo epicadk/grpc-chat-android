@@ -1,8 +1,5 @@
 package com.example.grpc_chat_android.repository
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.grpc_chat_android.PreferenceManager
 import io.grpc.CallOptions
 import io.grpc.Channel
@@ -12,7 +9,6 @@ import io.grpc.ForwardingClientCall
 import io.grpc.Metadata
 import io.grpc.MethodDescriptor
 import javax.inject.Inject
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
 class NetworkInterceptor @Inject constructor(private val preferenceManager: PreferenceManager) : ClientInterceptor {
