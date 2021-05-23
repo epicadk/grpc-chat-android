@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.grpc_chat_android.PreferenceManager
 import com.example.grpc_chat_android.di.dataStore
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.ChatRepository
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val repository: ChatRepository, private val dataStore: DataStore<Preferences>) : ViewModel() {
+class SignInViewModel @Inject constructor(private val repository: ChatRepository, private val preferenceManager: PreferenceManager) : ViewModel() {
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
@@ -28,8 +29,10 @@ class SignInViewModel @Inject constructor(private val repository: ChatRepository
         repository.login(loginRequest, object : StreamObserver<Chat.LoginResponse> {
             override fun onNext(value: Chat.LoginResponse?) {
                 _message.postValue("Login Successful")
+                // Using runblocking because we need these value ASAP
                 runBlocking {
-                    saveToken(value!!.accessToken)
+                    preferenceManager.saveToken(value!!.accessToken)
+                    preferenceManager.saveUserPhone(loginRequest.phonenumber)
                 }
             }
 
@@ -56,18 +59,6 @@ class SignInViewModel @Inject constructor(private val repository: ChatRepository
             override fun onCompleted() {
             }
         })
-    }
-
-    suspend fun saveUserPhone(phone: String, key: Preferences.Key<String>) {
-        dataStore.edit { user ->
-            user[key] = phone
-        }
-    }
-
-    suspend fun saveToken(token: String) {
-        dataStore.edit { jwt ->
-            jwt[stringPreferencesKey("jwtToken")] = token
-        }
     }
 
     fun deleteAll() = viewModelScope.launch { repository.deleteAll() }

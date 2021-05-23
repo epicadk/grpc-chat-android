@@ -65,10 +65,6 @@ class LoginFragment : Fragment() {
                 "Login Successful" -> {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     lifecycleScope.launch {
-                        viewModel.saveUserPhone(
-                            binding.loginEtPhone.text.toString(),
-                            key
-                        )
                         findNavController().navigate(
                             LoginFragmentDirections.actionLoginFragmentToChatListFragment(
                                 binding.loginEtPhone.text.toString()
