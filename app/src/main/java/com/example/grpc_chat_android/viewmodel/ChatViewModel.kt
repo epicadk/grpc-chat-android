@@ -19,8 +19,10 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
     val message: LiveData<String>
         get() = _message
 
-    fun connect(phone: Chat.Phone) {
-        repository.connect(phone, object : StreamObserver<Chat.Message> {
+    private lateinit var requestObserver: StreamObserver<Chat.Message>
+
+    fun connect() {
+        requestObserver = repository.connect(object : StreamObserver<Chat.Message> {
             override fun onNext(value: Chat.Message?) {
                 if (value != null) viewModelScope.launch {
                     repository.insert(value, value.from, value.time)
@@ -39,20 +41,22 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
     val allChatLiveData = repository.chatList.asLiveData()
 
     fun sendMessage(message: Chat.Message, otherUser: String, time: Long) {
-        repository.sendMessage(message, object : StreamObserver<Chat.Success> {
-            override fun onNext(value: Chat.Success?) {}
+        try {
+            requestObserver.onNext(message)
+        }
+        catch (e: RuntimeException) {
+            requestObserver.onError(e)
+            _message.postValue(e.message)
+            throw e
+        }
 
-            override fun onError(t: Throwable?) {
-                _message.postValue(t?.message)
-            }
-
-            override fun onCompleted() {
-                // DO nothing
-            }
-        })
         // add message to local storage
         viewModelScope.launch { repository.insert(message, otherUser, time) }
     }
 
     fun loadChat(chatId: String) = repository.loadChat(chatId).asLiveData()
+
+    override fun onCleared() {
+        requestObserver.onCompleted()
+    }
 }

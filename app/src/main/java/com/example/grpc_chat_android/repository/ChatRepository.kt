@@ -18,11 +18,8 @@ class ChatRepository @Inject constructor(
     fun login(loginRequest: Chat.LoginRequest, observer: StreamObserver<Chat.LoginResponse>) =
         stub.login(loginRequest, observer)
 
-    fun connect(phone: Chat.Phone, observer: StreamObserver<Chat.Message>) =
-        stub.withInterceptors(interceptor).connect(phone, observer)
-
-    fun sendMessage(message: Chat.Message, observer: StreamObserver<Chat.Success>) =
-        stub.withInterceptors(interceptor).sendChat(message, observer)
+    fun connect(observer: StreamObserver<Chat.Message>): StreamObserver<Chat.Message> =
+        stub.withInterceptors(interceptor).connect(observer)
 
     val chatList = chatDao.loadChatPreview()
 
