@@ -22,6 +22,7 @@ import com.example.grpc_chat_android.view.adapter.MessageAdapter
 import com.example.grpc_chat_android.viewmodel.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.Instant
+import java.util.UUID
 import javax.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -66,6 +67,7 @@ class MessageListFragment : Fragment() {
         binding.btMessage.setOnClickListener {
             viewModel.sendMessage(
                 Chat.Message.newBuilder()
+                    .setId(UUID.randomUUID().toString())
                     .setTo(argument.otherUserPhone)
                     .setFrom(userPhone)
                     .setBody(binding.messageEt.text.toString())
