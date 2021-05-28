@@ -26,9 +26,6 @@ class ChatListFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel: ChatViewModel by activityViewModels()
-
-    @Inject
-    lateinit var key: Preferences.Key<String>
     private val chatAdapter: ChatAdapter by lazy { ChatAdapter() }
 
     override fun onCreateView(

@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
-import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.grpc_chat_android.PreferenceManager
 import com.example.grpc_chat_android.R
 import com.example.grpc_chat_android.databinding.FragmentMessageListBinding
-import com.example.grpc_chat_android.di.dataStore
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.repository.Mapper
 import com.example.grpc_chat_android.view.activities.MainActivity
@@ -24,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.Instant
 import java.util.UUID
 import javax.inject.Inject
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -38,13 +36,13 @@ class MessageListFragment : Fragment() {
     private val adapter: MessageAdapter by lazy { MessageAdapter() }
 
     @Inject
-    lateinit var key: Preferences.Key<String>
+    lateinit var preferenceManager: PreferenceManager
     private var userPhone: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
-            userPhone = requireContext().dataStore.data.map { it[key] }.first()
+            userPhone = preferenceManager.getUserPhone()
         }
     }
 

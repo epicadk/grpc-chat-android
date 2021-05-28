@@ -3,7 +3,6 @@ package com.example.grpc_chat_android.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.Module
 import dagger.Provides
@@ -20,9 +19,6 @@ object Utils {
     @Provides
     fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
         context.dataStore
-
-    @Provides
-    fun provideStringPreferenceKey(): Preferences.Key<String> = stringPreferencesKey("phone")
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user")

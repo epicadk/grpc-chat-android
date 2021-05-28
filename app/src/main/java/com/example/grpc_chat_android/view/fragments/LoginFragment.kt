@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +14,6 @@ import com.example.grpc_chat_android.databinding.FragmentLoginBinding
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -25,9 +23,6 @@ class LoginFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel: SignInViewModel by viewModels()
-
-    @Inject
-    lateinit var key: Preferences.Key<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
