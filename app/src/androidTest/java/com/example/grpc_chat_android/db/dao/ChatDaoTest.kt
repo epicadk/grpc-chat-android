@@ -62,7 +62,7 @@ class ChatDaoTest {
     }
 
     @Test
-    fun testDaoFindOne2() {
+    fun testDaoFindOne_NoResult() {
         runBlocking {
             chatDao.insertChat(ChatEntity(1, "message", "sender1", "", "1", 1))
             chatDao.insertChat(ChatEntity(2, "message", "sender2", "", "2", 1))
@@ -74,8 +74,8 @@ class ChatDaoTest {
     @Test
     fun testDaoChatPreview() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", "", "1", 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", "", "2", 1))
+            chatDao.insertChat(ChatEntity(1, "message", "sender1", "user", "1", 1))
+            chatDao.insertChat(ChatEntity(2, "message", "sender2", "user", "2", 1))
             val message = chatDao.loadChatPreview().first()
             Truth.assertThat(message)
                 .containsExactly(ChatPreview("1"), ChatPreview("2"))
