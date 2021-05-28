@@ -34,13 +34,13 @@ class ChatDaoTest {
 
     @Test
     fun testChatDaoInsert() {
-        runBlocking { chatDao.insertChat(ChatEntity(1, "message", "string", "", "1", 1)) }
+        runBlocking { chatDao.insertChat(ChatEntity("1", "message", "string", "", "1", 1)) }
         val cursor = database.query("Select * From ChatEntity", arrayOf())
         cursor.moveToFirst()
 
         Truth.assertThat(cursor.count).isEqualTo(1)
 
-        Truth.assertThat(cursor.getLong(cursor.getColumnIndexOrThrow("id"))).isEqualTo(1)
+        Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("id"))).isEqualTo("1")
         Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("body")))
             .isEqualTo("message")
         Truth.assertThat(cursor.getString(cursor.getColumnIndexOrThrow("from")))
@@ -54,18 +54,18 @@ class ChatDaoTest {
     @Test
     fun testDaoFindOne() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", "", "1", 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", "", "2", 1))
+            chatDao.insertChat(ChatEntity("", "message", "sender1", "", "1", 1))
+            chatDao.insertChat(ChatEntity("2", "message", "sender2", "", "2", 1))
             val message = chatDao.loadOneChat("2").first()
-            Truth.assertThat(message).containsExactly(ChatEntity(2, "message", "sender2", "", "2", 1))
+            Truth.assertThat(message).containsExactly(ChatEntity("2", "message", "sender2", "", "2", 1))
         }
     }
 
     @Test
     fun testDaoFindOne_NoResult() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", "", "1", 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", "", "2", 1))
+            chatDao.insertChat(ChatEntity("1", "message", "sender1", "", "1", 1))
+            chatDao.insertChat(ChatEntity("2", "message", "sender2", "", "2", 1))
             val message = chatDao.loadOneChat("3").first()
             Truth.assertThat(message).isEmpty()
         }
@@ -74,8 +74,8 @@ class ChatDaoTest {
     @Test
     fun testDaoChatPreview() {
         runBlocking {
-            chatDao.insertChat(ChatEntity(1, "message", "sender1", "user", "1", 1))
-            chatDao.insertChat(ChatEntity(2, "message", "sender2", "user", "2", 1))
+            chatDao.insertChat(ChatEntity("1", "message", "sender1", "user", "1", 1))
+            chatDao.insertChat(ChatEntity("2", "message", "sender2", "user", "2", 1))
             val message = chatDao.loadChatPreview().first()
             Truth.assertThat(message)
                 .containsExactly(ChatPreview("1"), ChatPreview("2"))
