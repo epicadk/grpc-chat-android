@@ -7,6 +7,7 @@ object Mapper {
     fun toProto(entity: ChatEntity): Chat.Message {
         return Chat.Message.newBuilder()
             .apply {
+                id = entity.id
                 body = entity.body
                 from = entity.from
                 time = entity.time
@@ -15,6 +16,6 @@ object Mapper {
     }
 
     fun fromProto(message: Chat.Message): ChatEntity {
-        return ChatEntity(0, message.body, message.from, message.to, null, message.time)
+        return ChatEntity(message.id, message.body, message.from, message.to, null, message.time)
     }
 }

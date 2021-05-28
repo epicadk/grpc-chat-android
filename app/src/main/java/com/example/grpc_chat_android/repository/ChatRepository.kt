@@ -27,9 +27,8 @@ class ChatRepository @Inject constructor(
 
     fun loadChat(chatId: String) = chatDao.loadOneChat(chatId)
 
-    suspend fun insert(message: Chat.Message, chatId: String, time: Long) {
+    suspend fun insert(message: Chat.Message, chatId: String, time: Long) =
         chatDao.insertChat(ChatEntity(message, chatId, time))
-    }
 
     suspend fun deleteAll() = chatDao.deleteAll()
 }
