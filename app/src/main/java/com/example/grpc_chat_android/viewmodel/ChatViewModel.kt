@@ -43,8 +43,7 @@ class ChatViewModel @Inject constructor(private val repository: ChatRepository) 
     fun sendMessage(message: Chat.Message, otherUser: String, time: Long) {
         try {
             requestObserver.onNext(message)
-        }
-        catch (e: RuntimeException) {
+        } catch (e: RuntimeException) {
             requestObserver.onError(e)
             _message.postValue(e.message)
             throw e

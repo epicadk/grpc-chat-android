@@ -8,7 +8,7 @@ import com.example.grpc_chat_android.databinding.ItemChatBinding
 import com.example.grpc_chat_android.db.entities.ChatPreview
 import com.example.grpc_chat_android.view.fragments.ChatListFragmentDirections
 
-class ChatAdapter() : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
     private lateinit var chatList: List<ChatPreview>
 
     fun setData(data: List<ChatPreview>) {
