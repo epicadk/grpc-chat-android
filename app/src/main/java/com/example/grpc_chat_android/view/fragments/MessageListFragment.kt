@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.Instant
 import java.util.UUID
 import javax.inject.Inject
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -32,12 +31,12 @@ class MessageListFragment : Fragment() {
     private val binding
         get() = _binding!!
     private val viewModel: ChatViewModel by activityViewModels()
-    private val argument: MessageListFragmentArgs by navArgs()
-    private val adapter: MessageAdapter by lazy { MessageAdapter(argument.otherUserPhone) }
+    private val args by navArgs<MessageListFragmentArgs>()
+    private val adapter: MessageAdapter by lazy { MessageAdapter(args.otherUserPhone) }
 
     @Inject
     lateinit var preferenceManager: PreferenceManager
-    private var userPhone: String? = ""
+    private var userPhone: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,27 +52,31 @@ class MessageListFragment : Fragment() {
     ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         (activity as MainActivity).findViewById<Toolbar>(R.id.toolbar).title =
-            argument.otherUserPhone
+            args.otherUserPhone
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMessage.adapter = adapter
-        viewModel.loadChat(argument.otherUserPhone)
+        viewModel.loadChat(args.otherUserPhone)
             .observe(viewLifecycleOwner, { adapter.setData(it.map { Mapper.toProto(it) }) })
         binding.messageEt.doOnTextChanged { text, _, _, _ ->
             binding.btMessage.isEnabled = text.toString().isNotBlank()
         }
         binding.btMessage.setOnClickListener {
-            viewModel.sendMessage(
-                Chat.Message.newBuilder()
-                    .setId(UUID.randomUUID().toString())
-                    .setTo(argument.otherUserPhone)
-                    .setFrom(userPhone)
-                    .setBody(binding.messageEt.text.toString())
-                    .build(),
-                argument.otherUserPhone,
-                Instant.now().toEpochMilli()
-            )
-            binding.messageEt.clearFocus()
-            binding.messageEt.setText("")
+            if (!userPhone.isNullOrBlank()) {
+                viewModel.sendMessage(
+                    Chat.Message.newBuilder()
+                        .setId(UUID.randomUUID().toString())
+                        .setTo(args.otherUserPhone)
+                        .setFrom(userPhone)
+                        .setBody(binding.messageEt.text.toString())
+                        .build(),
+                    args.otherUserPhone,
+                    Instant.now().toEpochMilli()
+                )
+                binding.messageEt.clearFocus()
+                binding.messageEt.setText("")
+            } else {
+                throw Exception("User phone number is null")
+            }
         }
         return binding.root
     }
