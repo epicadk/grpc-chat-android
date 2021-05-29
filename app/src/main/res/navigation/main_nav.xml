@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/chatListFragment">
 
     <fragment
         android:id="@+id/chatListFragment"
@@ -17,9 +17,11 @@
         <action
             android:id="@+id/action_chatListFragment_to_newChatFragment"
             app:destination="@id/newChatFragment" />
-        <argument
-            android:name="User"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_chatListFragment_to_authActivity"
+            app:destination="@id/authActivity"
+            app:popUpTo="@id/chatListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -48,28 +50,9 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.grpc_chat_android.view.fragments.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_chatListFragment"
-            app:destination="@id/chatListFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.example.grpc_chat_android.view.fragments.SignUpFragment"
-        android:label="Sign Up"
-        tools:layout="@layout/fragment_signup">
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.example.grpc_chat_android.view.activities.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
 </navigation>

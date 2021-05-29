@@ -8,13 +8,14 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.grpc_chat_android.PreferenceManager
 import com.example.grpc_chat_android.databinding.FragmentLoginBinding
 import com.example.grpc_chat_android.models.Chat
 import com.example.grpc_chat_android.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -23,6 +24,8 @@ class LoginFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel: SignInViewModel by viewModels()
+    @Inject
+    lateinit var preferenceManager: PreferenceManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +34,13 @@ class LoginFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        runBlocking {
+            val authToken = preferenceManager.getToken()
+            if (!authToken.isNullOrBlank()) {
+                login()
+            }
+        }
 
         binding.btSignup.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
@@ -59,13 +69,8 @@ class LoginFragment : Fragment() {
             when (it) {
                 "Login Successful" -> {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                    lifecycleScope.launch {
-                        findNavController().navigate(
-                            LoginFragmentDirections.actionLoginFragmentToChatListFragment(
-                                binding.loginEtPhone.text.toString()
-                            )
-                        )
-                    }
+                    login()
+                    // Delete chats only on new login
                     viewModel.deleteAll()
                 }
                 else -> Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
@@ -77,5 +82,10 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun login() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
+        activity?.finish()
     }
 }
