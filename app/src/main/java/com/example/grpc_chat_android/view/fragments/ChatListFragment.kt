@@ -2,11 +2,9 @@ package com.example.grpc_chat_android.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.grpc_chat_android.PreferenceManager
 import com.example.grpc_chat_android.R
 import com.example.grpc_chat_android.databinding.FragmentChatListBinding
+import com.example.grpc_chat_android.view.activities.MainActivity
 import com.example.grpc_chat_android.view.adapter.ChatAdapter
 import com.example.grpc_chat_android.viewmodel.ChatViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -31,6 +30,7 @@ class ChatListFragment : Fragment() {
 
     private val viewModel: ChatViewModel by activityViewModels()
     private val chatAdapter: ChatAdapter by lazy { ChatAdapter() }
+    private lateinit var toolbar: Toolbar
 
     @Inject
     lateinit var preferenceManager: PreferenceManager
@@ -46,6 +46,18 @@ class ChatListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
+
+        toolbar = (activity as MainActivity).findViewById(R.id.toolbar)
+        toolbar.inflateMenu(R.menu.main_options_menu)
+        toolbar.setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener when (it.itemId) {
+                R.id.menu_logout -> {
+                    showLogoutDialog()
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.fbAddChat.setOnClickListener {
             findNavController()
@@ -66,20 +78,7 @@ class ChatListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_options_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_logout -> {
-                showLogoutDialog()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+        toolbar.menu.clear()
     }
 
     private fun showLogoutDialog() {
