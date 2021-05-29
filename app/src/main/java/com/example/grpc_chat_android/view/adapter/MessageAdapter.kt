@@ -12,16 +12,11 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class MessageAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageAdapter(private val otherUserPhone: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
     private lateinit var messageList: List<Chat.Message>
-    private lateinit var otherUserPhone: String
-
-    fun setOtherUserPhone(phone: String) {
-        otherUserPhone = phone
-    }
 
     fun setData(data: List<Chat.Message>) {
         messageList = data

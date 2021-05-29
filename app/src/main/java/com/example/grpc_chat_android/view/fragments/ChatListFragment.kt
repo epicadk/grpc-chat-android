@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -17,7 +16,6 @@ import com.example.grpc_chat_android.view.activities.MainActivity
 import com.example.grpc_chat_android.view.adapter.ChatAdapter
 import com.example.grpc_chat_android.viewmodel.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChatListFragment : Fragment() {

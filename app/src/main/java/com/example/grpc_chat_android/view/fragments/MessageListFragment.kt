@@ -33,7 +33,7 @@ class MessageListFragment : Fragment() {
         get() = _binding!!
     private val viewModel: ChatViewModel by activityViewModels()
     private val argument: MessageListFragmentArgs by navArgs()
-    private val adapter: MessageAdapter by lazy { MessageAdapter() }
+    private val adapter: MessageAdapter by lazy { MessageAdapter(argument.otherUserPhone) }
 
     @Inject
     lateinit var preferenceManager: PreferenceManager
@@ -56,7 +56,6 @@ class MessageListFragment : Fragment() {
             argument.otherUserPhone
         binding.rvMessage.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMessage.adapter = adapter
-        adapter.setOtherUserPhone(argument.otherUserPhone)
         viewModel.loadChat(argument.otherUserPhone)
             .observe(viewLifecycleOwner, { adapter.setData(it.map { Mapper.toProto(it) }) })
         binding.messageEt.doOnTextChanged { text, _, _, _ ->
